@@ -1,0 +1,301 @@
+
+body {
+    margin: 0;
+    padding: 20px 20px;
+    background: url('../images/back.jpg') repeat-y center;
+    background-size: cover;
+    color: #333;
+}
+
+
+.outer-box,
+.kutucuk,
+.kutu {
+    background: white;
+    border: 1px solid #ccc;
+    padding: 30px;
+    margin: 10px auto;
+    max-width: 1200px;
+    box-sizing: border-box;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+}
+
+.inner-box {
+    background: white;
+    padding: 15px 100px;
+    border: 2px solid #eee;
+}
+
+
+h1 {
+    font-size: 45px;
+    font-style: italic;
+    margin: 0 0 15px 0;
+}
+
+.light-bold {
+    font-weight: 390;
+}
+
+.strong-bold {
+    font-weight: 650;
+}
+
+
+.header-box,
+.header-box-2 {
+    max-width: 1200px;
+    margin: 80px auto 0;
+    margin-top: 10px;
+    padding: 4px 20px;
+    background: linear-gradient(#018bba, #018bba 35%, #038dbe 77%, #048ebf 81%, #0690c5);
+    border-radius: 7px;
+    color: white;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 8px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+    .header-box h2 {
+        font-size: 25px !important;
+        font-weight: bold;
+        font-style: italic;
+    }
+
+.text {
+    font-size: 16px;
+    letter-spacing: -0.1px;
+}
+
+/* Ýçerik düzeni - Bootstrap ile responsive */
+.content {
+    display: flex;
+    gap: 50px;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+/* Profil fotoðrafý responsive boyutlarý */
+.photo {
+    width: 330px;
+    height: auto;
+}
+
+/* Bootstrap responsive overrides */
+@media (min-width: 769px) and (max-width: 1100px) {
+    .photo {
+        width: 280px !important;
+    }
+
+    .text {
+        max-width: 400px !important;
+    }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+    .photo {
+        width: 250px !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .photo {
+        width: 220px !important;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    body {
+        padding: 30px 15px;
+    }
+
+    .outer-box,
+    .kutucuk,
+    .kutu {
+        padding: 20px;
+    }
+
+    .inner-box {
+        padding: 15px 15px;
+    }
+
+    /* Form label'larý üstte göster - mobil */
+    .form-group.row {
+        flex-direction: column !important;
+        display: flex !important;
+    }
+
+        .form-group.row .col-sm-3,
+        .form-group.row .col-sm-9 {
+            max-width: 100% !important;
+            flex: 0 0 100% !important;
+            width: 100% !important;
+        }
+
+        .form-group.row .col-sm-3 {
+            margin-bottom: 8px !important;
+            text-align: left !important;
+        }
+
+        .form-group.row .col-sm-9 {
+            padding-left: 0 !important;
+        }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+    h1 {
+        font-size: 35px;
+    }
+
+    body {
+        padding: 50px 20px;
+    }
+
+    .inner-box {
+        padding: 15px 20px;
+    }
+
+    /* Form label'larý üstte göster - tablet */
+    .form-group.row {
+        flex-direction: column !important;
+        display: flex !important;
+    }
+
+        .form-group.row .col-sm-3,
+        .form-group.row .col-sm-9 {
+            max-width: 100% !important;
+            flex: 0 0 100% !important;
+            width: 100% !important;
+        }
+
+        .form-group.row .col-sm-3 {
+            margin-bottom: 8px !important;
+            text-align: left !important;
+        }
+
+        .form-group.row .col-sm-9 {
+            padding-left: 0 !important;
+        }
+}
+
+.btn-mor {
+    background-color: #5e0bb9;
+    border: none;
+    color: white;
+    font-weight: 600;
+    padding: 2px 30px;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: background-color 0.1s ease;
+    width: 100%; /* .col-sm-9 ile ayný geniþlik */
+    box-sizing: border-box;
+}
+
+    .btn-mor:hover {
+        background-color: #5e0bb9;
+        color: white;
+    }
+
+.foto-button {
+    width: 100%; /* .col-sm-9 ile hizalý */
+    max-width: none; /* Sabit geniþlik kýsýtlamasýný kaldýr */
+}
+
+/* 4'lü foto yükleme alanýný her zaman yan yana tut */
+.upload-row {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    gap: 6px;
+}
+
+.upload-col {
+    flex: 1 1 23%;
+    min-width: 0;
+}
+
+@media (max-width: 576px) {
+    .upload-row {
+        gap: 4px;
+    }
+
+    .upload-col {
+        flex: 1 1 22%;
+    }
+}
+
+.upload-box {
+    display: block;
+    width: 100%;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+    .upload-box img {
+        width: 100%;
+        height: auto;
+        display: block;
+        opacity: 0.50;
+    }
+
+.paylasilan-kutu {
+    width: 100%;
+    margin-left: 5px;
+    padding: 15px 0;
+    border-bottom: none;
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+}
+
+    .paylasilan-kutu::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background-color: #ccc;
+    }
+
+    .paylasilan-kutu h3 {
+        font-size: 16px;
+        font-weight: 700;
+        margin: 0 0 5px;
+        color: #000;
+        text-align: left;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+.paylasilan-numara {
+    font-weight: normal;
+    color: #999;
+    font-size: 13px;
+    margin-left: 5px;
+}
+
+.paylasilan-metin {
+    font-size: 15px;
+    color: #333;
+    text-align: left;
+    line-height: 1.6;
+    margin-bottom: 0;
+    width: 50%;
+}
+
+.paylasilan-icerik {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.paylasilan-foto {
+    max-width: 120px;
+    border-radius: 4px;
+}
