@@ -66,3 +66,4 @@ C:\Users\esmah\OneDrive\Desktop\ayhankizil\ayhankizil\obj\Debug\net8.0\refint\ay
 C:\Users\esmah\OneDrive\Desktop\ayhankizil\ayhankizil\obj\Debug\net8.0\ayhankizil.pdb
 C:\Users\esmah\OneDrive\Desktop\ayhankizil\ayhankizil\obj\Debug\net8.0\ayhankizil.genruntimeconfig.cache
 C:\Users\esmah\OneDrive\Desktop\ayhankizil\ayhankizil\obj\Debug\net8.0\ref\ayhankizil.dll
+C:\Users\esmah\OneDrive\Desktop\ayhankizil\ayhankizil\obj\Debug\net8.0\ayhankizil.sourcelink.json
