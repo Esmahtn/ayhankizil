@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ayhankizil.Data; // Veri tabanı context'in burada olmalı
-using ayhankizil.Models; // Paylasim modelin burada olmalı
+using ayhankizil.Data; // DbContext
+using ayhankizil.Models; // Paylasim model
 
 namespace ayhankizil.Controllers
 {
@@ -14,11 +14,12 @@ namespace ayhankizil.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Ekle(string AdSoyad, string Email, string PaylasimMetni)
         {
             if (string.IsNullOrWhiteSpace(AdSoyad) || string.IsNullOrWhiteSpace(PaylasimMetni))
             {
-                // Eksik bilgi varsa hata ver
+                // Eksik bilgi varsa hata ver (basit şekilde BadRequest)
                 return BadRequest("Ad Soyad ve Paylaşım metni boş bırakılamaz.");
             }
 
@@ -32,7 +33,7 @@ namespace ayhankizil.Controllers
             _context.Paylasimlar.Add(yeniPaylasim);
             _context.SaveChanges();
 
-            // Kayıt sonrası anasayfaya dön
+            // Başarılı kayıt sonrası Home/Index sayfasına yönlendir
             return RedirectToAction("Index", "Home");
         }
     }

@@ -56,25 +56,27 @@
 
         <!-- Sağ Form Alanı -->
         <div class="col-12 col-lg-6">
-            <form enctype="multipart/form-data">
+            <form asp-controller="Paylasim" asp-action="Ekle" method="post" enctype="multipart/form-data">
+                @Html.AntiForgeryToken()
+
                 <div class="form-group row align-items-center mb-3">
                     <label for="ad-soyad" class="col-sm-3 col-form-label">Adı Soyadı</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="ad-soyad" required />
+                        <input type="text" class="form-control" id="ad-soyad" name="AdSoyad" required />
                     </div>
                 </div>
 
                 <div class="form-group row align-items-center mb-3">
                     <label for="email" class="col-sm-3 col-form-label">Email</label>
                     <div class="col-sm-9">
-                        <input type="email" class="form-control" id="email" required />
+                        <input type="email" class="form-control" id="email" name="Email" required />
                     </div>
                 </div>
 
                 <div class="form-group row mb-3">
                     <label for="paylasim" class="col-sm-3 col-form-label">Paylaşımınız</label>
                     <div class="col-sm-9">
-                        <textarea class="form-control" id="paylasim" rows="5" maxlength="1000" required></textarea>
+                        <textarea class="form-control" id="paylasim" name="PaylasimMetni" rows="5" maxlength="1000" required></textarea>
                     </div>
                 </div>
 
@@ -88,7 +90,7 @@
                                 <div class="upload-col">
                                     <label for="foto@i" class="upload-box">
                                         <img src="~/images/kamera.jpg" alt="Foto @i" />
-                                        <input type="file" id="foto@i" name="foto@i" accept="image/*" hidden />
+                                        <input type="file" id="foto@i" name="Foto@i" accept="image/*" hidden />
                                     </label>
                                 </div>
                             }
