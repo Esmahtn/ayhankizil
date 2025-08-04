@@ -1,183 +1,214 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Prof. Dr. Ayhan Kızıl";
 }
 
-<div class="outer-box">
-    <div class="inner-box">
-        <div class="content d-flex flex-column flex-sm-row gap-3 gap-md-4 gap-lg-5 align-items-start justify-content-center">
-            <div class="image-container align-self-center align-self-sm-start">
-                <img src="/images/Prof-Dr-Ayhan-Kizil-2.jpg" alt="Ayhan Kızıl" class="photo" />
-                <div class="year text-center" style="font-weight: 300; color: #666; margin-top: 8px;">(1937 - 2015)</div>
-            </div>
-            <div class="text text-start" style="max-width: 450px;">
-                <h1 class="fs-1 fs-sm-2 fs-md-1">
-                    <span class="light-bold">Prof.Dr.</span><span class="strong-bold"> Ayhan Kızıl</span>
-                </h1>
-                <p>Sevgili Eşim<br>Değerli Babamız<br>Biricik Dedemiz<br>Prof. Ayhan Kızıl aniden aramızdan ayrıldı.</p>
-                <p>Onu zaten biz sevenleri hiç unutmayacağız.<br>Onunla olan anılarımızı bu sitede paylaşacağız ki bu güzel gülen insanı çocuklarımız da, torunlarımız da, dostlarımız da hiç unutmasınlar.</p>
-                <p>İlk aşaması olan bu sitede ister anılarınızı, isterseniz onunla beraber olan fotolarınızı paylaşabilirsiniz.<br>Yakın bir zamanda bu site olması gerektiği şekilde düzenlenip, hayatına devam edecektir.</p>
-                <p class="goodbye">Güle güle Ayhan Dedemiz</p>
-            </div>
+<div class="content d-flex flex-column flex-sm-row gap-3 gap-md-4 gap-lg-5 align-items-start justify-content-center">
+    <!-- Resim container - küçük ekranlarda ortala -->
+    <div class="image-container align-self-center align-self-sm-start">
+        <img src="~/images/Prof-Dr-Ayhan-Kizil-2.jpg" alt="Ayhan Kızıl" class="photo" />
+        <div class="year text-center" style="font-weight: 300; color: #666; margin-top: 8px;">(1937 - 2015)</div>
+    </div>
+    <!-- Text container - responsive genişlik ve hizalama -->
+    <div class="text text-start" style="max-width: 450px;">
+        <h1 class="fs-1 fs-sm-2 fs-md-1"><span class="light-bold">Prof.Dr.</span><span class="strong-bold"> Ayhan Kızıl</span></h1>
+        <p>Sevgili Eşim<br>Değerli Babamız<br>Biricik Dedemiz<br>Prof. Ayhan Kızıl aniden aramızdan ayrıldı.</p>
+        <p>Onu zaten biz sevenleri hiç unutmayacağız.<br>Onunla olan anılarımızı bu sitede paylaşacağız ki bu güzel gülen insanı çocuklarımız da, torunlarımız da, dostlarımız da hiç unutmasınlar.</p>
+        <p>İlk aşaması olan bu sitede ister anılarınızı, isterseniz onunla beraber olan fotolarınızı paylaşabilirsiniz.<br>Yakın bir zamanda bu site olması gerektiği şekilde düzenlenip, hayatına devam edecektir.</p>
+        <p class="goodbye">Güle güle Ayhan Dedemiz</p>
+    </div>
+</div>
+
+<!-- Start WOWSlider.com BODY section -->
+<div id="wowslider-container1">
+    <div class="ws_images">
+        <ul>
+            <li><img src="~/data1/images/1.jpg" alt="1" title="1" id="wows1_0" /></li>
+        </ul>
+    </div>
+    <div class="ws_script" style="position:absolute;left:-99%"><a href="http://wowslider.net">javascript slideshow</a> by WOWSlider.com v9.0</div>
+    <div class="ws_shadow"></div>
+</div>
+
+<div class="header-box text-center">
+    <h2>ANI DEFTERİ</h2>
+</div>
+<br>
+
+<!-- Bootstrap responsive grid -->
+<div class="row">
+    <!-- Sol kolon - büyük ekranlarda yarım genişlik -->
+    <div class="col-12 col-lg-6 mb-4">
+        <div class="sol-kutu p-2 mb-3 text-center" style="background: white; width: 100%; max-width: 550px; box-shadow: 0 0 5px rgba(0,0,0,0.1); border: 0.5px solid #ccc;">
+            <img src="~/images/ayhan.jpg" class="img-fluid" alt="foto" style="border: 2px solid white;" />
         </div>
+        <p class="mt-3" style="font-size: 16px;">
+            Prof.Dr. Ayhan Kızıl ile ilgili düşüncelerinizi ve fotoğraflarınızı yandaki formu kullanarak <strong>paylaşabilirsiniz.</strong><br /><br>
+            Yanda görülen kısma isminizi ve yazınızı yazabilir; fotoğraf eklemek için yine yanda görünen fotoğraf ekle kısmına tıklayarak bilgisayarınızdaki resmi yükleyebilirsiniz.
+        </p>
     </div>
 
-    <!-- WOWSlider Başlangıcı -->
-    <div id="wowslider-container1">
-        <div class="ws_images">
-            <ul>
-                <li><img src="/wowslider/data1/images/1.jpg" alt="1" title="1" id="wows1_0" /></li>
-            </ul>
-        </div>
-        <div class="ws_script" style="position:absolute;left:-99%">
-            <a href="http://wowslider.net">javascript slideshow</a> by WOWSlider.com v9.0
-        </div>
-        <div class="ws_shadow"></div>
-    </div>
-    <script type="text/javascript" src="/wowslider/engine1/wowslider.js"></script>
-    <script type="text/javascript" src="/wowslider/engine1/script.js"></script>
-    <!-- WOWSlider Sonu -->
-
-    <div class="header-box text-center">
-        <h2>ANI DEFTERİ</h2>
-    </div><br>
-
-    <div class="row">
-        <div class="col-12 col-lg-6 mb-4">
-            <div class="sol-kutu p-2 mb-3 text-center"
-                style="background: white; width: 100%; max-width: 550px; box-shadow: 0 0 5px rgba(0,0,0,0.1); border: 0.5px solid #ccc;">
-                <img src="/images/ayhan.jpg" class="img-fluid" alt="foto" style="border: 2px solid white;" />
+    <!-- Sağ kolon - form alanı -->
+    <div class="col-12 col-lg-6">
+        <form enctype="multipart/form-data">
+            <!-- Ad Soyad - orijinal gibi -->
+            <div class="form-group row align-items-center mb-3">
+                <label for="ad-soyad" class="col-sm-3 col-form-label">Adı Soyadı</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="ad-soyad" required />
+                </div>
             </div>
-            <p class="mt-3" style="font-size: 16px;">
-                Prof.Dr. Ayhan Kızıl ile ilgili düşüncelerinizi ve fotoğraflarınızı yandaki formu kullanarak
-                <strong>paylaşabilirsiniz.</strong><br><br>
-                Yanda görülen kısma isminizi ve yazınızı yazabilir; fotoğraf eklemek için yine yanda görünen fotoğraf ekle kısmına tıklayarak bilgisayarınızdaki resmi yükleyebilirsiniz.
-            </p>
-        </div>
 
-        <div class="col-12 col-lg-6">
-            <form enctype="multipart/form-data">
-                <div class="form-group row align-items-center mb-3">
-                    <label for="ad-soyad" class="col-sm-3 col-form-label">Adı Soyadı</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" id="ad-soyad" required />
-                    </div>
+            <!-- Email -->
+            <div class="form-group row align-items-center mb-3">
+                <label for="email" class="col-sm-3 col-form-label">Email</label>
+                <div class="col-sm-9">
+                    <input type="email" class="form-control" id="email" required />
                 </div>
+            </div>
 
-                <div class="form-group row align-items-center mb-3">
-                    <label for="email" class="col-sm-3 col-form-label">Email</label>
-                    <div class="col-sm-9">
-                        <input type="email" class="form-control" id="email" required />
-                    </div>
+            <!-- Paylaşım -->
+            <div class="form-group row mb-3">
+                <label for="paylasim" class="col-sm-3 col-form-label">Paylaşımınız</label>
+                <div class="col-sm-9">
+                    <textarea class="form-control" id="paylasim" rows="5" maxlength="1000" required></textarea>
+                    <small class="form-text text-muted"></small>
                 </div>
+            </div>
 
-                <div class="form-group row mb-3">
-                    <label for="paylasim" class="col-sm-3 col-form-label">Paylaşımınız</label>
-                    <div class="col-sm-9">
-                        <textarea class="form-control" id="paylasim" rows="5" maxlength="1000" required></textarea>
-                    </div>
-                </div>
-
-                <div class="form-group row mb-4">
-                    <label class="col-sm-3 col-form-label"><br></label>
-                    <div class="col-sm-9">
-                        <div class="upload-row justify-content-between">
-                            @for (int i = 1; i <= 4; i++)
-                            {
-                                <div class="upload-col">
-                                    <label for="foto@i" class="upload-box">
-                                        <img src="/images/kamera.jpg" alt="Foto @i" />
-                                        <input type="file" id="foto@i" name="foto@i" accept="image/*" hidden />
-                                    </label>
-                                </div>
-                            }
+            <!-- Fotoğraf Yükleme -->
+            <div class="form-group row mb-4">
+                <label class="col-sm-3 col-form-label"><br></label>
+                <div class="col-sm-9">
+                    <div class="upload-row justify-content-between">
+                        <div class="upload-col">
+                            <label for="foto1" class="upload-box">
+                                <img src="~/images/kamera.jpg" alt="Foto 1" />
+                                <input type="file" id="foto1" name="foto1" accept="image/*" hidden />
+                            </label>
                         </div>
-                        <small class="form-text text-muted mt-2 d-block">
-                            Hiç resim seçmediniz. (Max 5 MB dosya yükleyebilirsiniz.)
-                        </small>
+                        <div class="upload-col">
+                            <label for="foto2" class="upload-box">
+                                <img src="~/images/kamera.jpg" alt="Foto 2" />
+                                <input type="file" id="foto2" name="foto2" accept="image/*" hidden />
+                            </label>
+                        </div>
+                        <div class="upload-col">
+                            <label for="foto3" class="upload-box">
+                                <img src="~/images/kamera.jpg" alt="Foto 3" />
+                                <input type="file" id="foto3" name="foto3" accept="image/*" hidden />
+                            </label>
+                        </div>
+                        <div class="upload-col">
+                            <label for="foto4" class="upload-box">
+                                <img src="~/images/kamera.jpg" alt="Foto 4" />
+                                <input type="file" id="foto4" name="foto4" accept="image/*" hidden />
+                            </label>
+                        </div>
                     </div>
-                </div>
-
-                <div class="form-group row mb-3">
-                    <div class="col-sm-3"></div>
-                    <div class="col-sm-9">
-                        <button type="submit" class="btn-mor">Kaydet</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-
-        <div class="form-group row mb-3">
-            <div class="col-sm-3"></div>
-            <div class="col-sm-9">
-                <div id="adUyarisi" class="alert alert-danger d-none" role="alert">
-                    • Anı eklemek için isminizi giriniz.
-                </div>
-                <div id="mesajUyarisi" class="alert alert-danger d-none" role="alert">
-                    • Anı eklemek için lütfen mesaj kısmını doldurunuz.
+                    <small class="form-text text-muted mt-2 d-block">
+                        Hiç resim seçmediniz. (Max 5 MB dosya yükleyebilirsiniz.)
+                    </small>
                 </div>
             </div>
-        </div>
 
-        <div class="header-box text-center">
-            <h2>PAYLAŞILANLAR</h2>
-        </div>
-
-        <div class="paylasilan-kutu">
-            <h3>Emine Özgün <span class="paylasilan-numara">#256</span></h3>
-            <p class="paylasilan-metin">hasret ve özlemle</p>
-        </div>
-
-        <div class="paylasilan-kutu">
-            <h3>Çiğdem Bilgin <span class="paylasilan-numara">#151</span></h3>
-            <p class="paylasilan-metin">
-                Canım öğretmenim. Rektör olduğunuz dönemde okudum ve sizin çağdaş, kadın erkek eşitliği olan harika uygulamalarınızla okudum, kampüste kampusu yaşadım...<br><br>
-                Nur içinde yat, mekanınız cennet olsun canım hocam. Aramızdan erken ayrılışınızı duyduğumda gözümden akan yaşlara hâkim olamadım. En güzel gençlik dönemimizin nadide bir kişisinin aramızdan ayrılması biz öğrencilerini derinden üzdü. Sizi çok seviyoruz, hep seveceğiz.
-            </p>
-        </div>
-
-        <div class="paylasilan-kutu">
-            <h3>İzzet Taşkıran <span class="paylasilan-numara">#123</span></h3>
-            <div class="paylasilan-icerik">
-                <div class="paylasilan-metin">
-                    Kızıl ailesinin hayatımda yeri ayrıdır. Rahmetli Prof. Ayhan Kızıl, babamın görüşme talebine olumlu yanıt verip Uludağ Üniversitesi'ne bağlı Fakültede tedaviye izin vermişti...<br><br>
-                    Her vakit duamda hatırlamaya devam ediyorum.
+            <!-- Kaydet Butonu -->
+            <div class="form-group row mb-3">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-9">
+                    <button type="submit" class="btn-mor">Kaydet</button>
                 </div>
-                <div>
-                    <img src="/images/sample-photo.jpg" alt="İzzet Taşkıran" class="paylasilan-foto" />
-                </div>
+            </div>
+        </form>
+    </div>
+    <!-- Uyarı Kutuları -->
+    <div class="form-group row mb-3">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-9">
+            <div id="adUyarisi" class="alert alert-danger d-none" role="alert">
+                • Anı eklemek için isminizi giriniz.
+            </div>
+            <div id="mesajUyarisi" class="alert alert-danger d-none" role="alert">
+                • Anı eklemek için lütfen mesaj kısmını doldurunuz.
             </div>
         </div>
     </div>
 </div>
 
-<script src="/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-<script src="/js/script.js"></script>
+<div class="header-box text-center">
+    <h2>PAYLAŞILANLAR</h2>
+</div>
+
+<div id="paylasilan-icerikler">
+    <div class="paylasilan-kutu active" data-page="1">
+        <h3>Emine Özgün <span class="paylasilan-numara">#256</span></h3>
+        <p class="paylasilan-metin">hasret ve özlemle</p>
+    </div>
+    <div class="paylasilan-kutu active" data-page="1">
+        <h3>Çiğdem Bilgin <span class="paylasilan-numara">#151</span></h3>
+        <p class="paylasilan-metin">
+            Canım öğretmenim. Rektör olduğunuz dönemde okudum ve sizin çağdaş, kadın erkek eşitliği olan harika uygulamalarınızla okudum, kampüste kampusu yaşadım...
+            <br><br>
+            Nur içinde yat, mekanınız cennet olsun canım hocam. Aramızdan erken ayrılışınızı duyduğumda gözümden akan yaşlara hâkim olamadım. En güzel gençlik dönemimizin nadide bir kişisinin aramızdan ayrılması biz öğrencilerini derinden üzdü. Sizi çok seviyoruz, hep seveceğiz.
+        </p>
+    </div>
+    <div class="paylasilan-kutu active" data-page="1">
+        <h3>İzzet Taşkıran <span class="paylasilan-numara">#123</span></h3>
+        <div class="paylasilan-icerik">
+            <div class="paylasilan-metin">
+                Kızıl ailesinin hayatımda yeri ayrıdır. Rahmetli Prof. Ayhan Kızıl, babamın görüşme talebine olumlu yanıt verip Uludağ Üniversitesi'ne bağlı Fakültede tedaviye izin vermişti...
+                <br><br>
+                Her vakit duamda hatırlamaya devam ediyorum.
+            </div>
+            <div>
+                <img src="~/images/sample-photo.jpg" alt="İzzet Taşkıran" class="paylasilan-foto" />
+            </div>
+        </div>
+    </div>
+    <!-- Diğer sayfa içerikleri -->
+    <div class="paylasilan-kutu" data-page="2">
+        <h3>Mehmet Yılmaz <span class="paylasilan-numara">#122</span></h3>
+        <p class="paylasilan-metin">
+            Sevgili hocamız, sizinle geçirdiğimiz günleri hiç unutmayacağız. Bilgi ve deneyimlerinizle hepimize yol gösterdiniz. Mekanınız cennet olsun.
+        </p>
+    </div>
+    <!-- Diğer sayfa içerikleri devam edebilir -->
+</div>
+
+<div class="pagination-container">
+    <button class="pagination-btn active" onclick="goToPage(1)">1</button>
+    <button class="pagination-btn" onclick="goToPage(2)">2</button>
+</div>
+
 <script>
+    let currentPage = 1;
+    const totalPages = 2;
+    const itemsPerPage = 3;
+
+    function showPage(page) {
+        const allBoxes = document.querySelectorAll('.paylasilan-kutu');
+        allBoxes.forEach(box => box.classList.remove('active'));
+        const pageBoxes = document.querySelectorAll(`[data-page="${page}"]`);
+        pageBoxes.forEach(box => box.classList.add('active'));
+        document.querySelectorAll('.pagination-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelector(`.pagination-btn[onclick="goToPage(${page})"]`).classList.add('active');
+        currentPage = page;
+    }
+
+    function goToPage(page) {
+        if (page >= 1 && page <= totalPages) showPage(page);
+    }
+
     document.querySelector("form").addEventListener("submit", function (e) {
         e.preventDefault();
         const ad = document.getElementById("ad-soyad").value.trim();
         const mesaj = document.getElementById("paylasim").value.trim();
         const adUyarisi = document.getElementById("adUyarisi");
         const mesajUyarisi = document.getElementById("mesajUyarisi");
-
         let valid = true;
-        if (ad === "") {
-            adUyarisi.classList.remove("d-none");
-            valid = false;
-        } else {
-            adUyarisi.classList.add("d-none");
-        }
-
-        if (mesaj === "") {
-            mesajUyarisi.classList.remove("d-none");
-            valid = false;
-        } else {
-            mesajUyarisi.classList.add("d-none");
-        }
-
-        if (valid) {
-            this.submit();
-        }
+        if (ad === "") { adUyarisi.classList.remove("d-none"); valid = false; } else adUyarisi.classList.add("d-none");
+        if (mesaj === "") { mesajUyarisi.classList.remove("d-none"); valid = false; } else mesajUyarisi.classList.add("d-none");
+        if (valid) this.submit();
     });
+
+    document.addEventListener('DOMContentLoaded', () => showPage(1));
 </script>

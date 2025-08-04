@@ -1,16 +1,12 @@
 body {
     margin: 0;
     padding: 20px;
-    background: url('../images/back.jpg') repeat-y center;
+    background: url('/images/back.jpg') repeat-y center;
     background-size: cover;
     color: #333;
-    box-sizing: border-box;
-    overflow-x: hidden;
 }
 
-.outer-box,
-.kutucuk,
-.kutu {
+.outer-box {
     background: white;
     border: 1px solid #ccc;
     padding: 30px;
@@ -18,25 +14,6 @@ body {
     max-width: 1200px;
     box-sizing: border-box;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
-    overflow-x: hidden;
-}
-
-.wowslider-container {
-    max-width: 1000px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 0 30px;
-    box-sizing: border-box;
-    display: block;
-    overflow: hidden;
-}
-
-.ws_images {
-    max-width: 100%;
-    height: auto;
-    overflow: hidden;
-    display: block;
-    margin: 0 auto;
 }
 
 .inner-box {
@@ -59,8 +36,7 @@ h1 {
     font-weight: 650;
 }
 
-.header-box,
-.header-box-2 {
+.header-box {
     max-width: 1200px;
     margin: 80px auto 0;
     margin-top: 10px;
@@ -112,29 +88,17 @@ h1 {
     .photo {
         width: 250px !important;
     }
-}
-
-@media (max-width: 576px) {
-    .photo {
-        width: 220px !important;
-    }
 
     h1 {
-        font-size: 28px;
+        font-size: 35px;
     }
 
     body {
-        padding: 30px 15px;
-    }
-
-    .outer-box,
-    .kutucuk,
-    .kutu {
-        padding: 20px;
+        padding: 50px 20px;
     }
 
     .inner-box {
-        padding: 15px 15px;
+        padding: 15px 20px;
     }
 
     .form-group.row {
@@ -159,17 +123,25 @@ h1 {
         }
 }
 
-@media (min-width: 577px) and (max-width: 768px) {
+@media (max-width: 576px) {
+    .photo {
+        width: 220px !important;
+    }
+
     h1 {
-        font-size: 35px;
+        font-size: 28px;
     }
 
     body {
-        padding: 50px 20px;
+        padding: 30px 15px;
+    }
+
+    .outer-box {
+        padding: 20px;
     }
 
     .inner-box {
-        padding: 15px 20px;
+        padding: 15px 15px;
     }
 
     .form-group.row {
@@ -211,11 +183,6 @@ h1 {
         background-color: #5e0bb9;
         color: white;
     }
-
-.foto-button {
-    width: 100%;
-    max-width: none;
-}
 
 .upload-row {
     display: flex !important;
@@ -310,3 +277,53 @@ h1 {
     max-width: 120px;
     border-radius: 4px;
 }
+
+.pagination-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 30px;
+    gap: 10px;
+}
+
+.pagination-btn {
+    background: #fff;
+    border: 1px solid #ddd;
+    color: #333;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+    .pagination-btn:hover {
+        background: #f8f9fa;
+        border-color: #adb5bd;
+    }
+
+    .pagination-btn.active {
+        background: #f8f9fa;
+        border-color: #7c838a;
+        color: #333;
+    }
+
+    .pagination-btn:disabled {
+        background: #f8f9fa;
+        border-color: #6c6c6c;
+        color: #6c757d;
+        cursor: not-allowed;
+    }
+
+        .pagination-btn:disabled:hover {
+            background: #62666a;
+            border-color: #3a3c3d;
+        }
+
+.paylasilan-kutu {
+    display: none;
+}
+
+    .paylasilan-kutu.active {
+        display: block;
+    }
