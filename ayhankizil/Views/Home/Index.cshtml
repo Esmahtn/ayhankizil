@@ -89,20 +89,31 @@
                             {
                                 var inputId = $"foto{i}";
                                 var inputName = $"Foto{i}";
-                                <div class="upload-col">
+                                <div class="upload-col" style="position: relative;">
                                     <label for="@inputId" class="upload-box">
-                                        <img src="~/images/kamera.jpg" alt="Foto @i" />
-                                        <input type="file" id="@inputId" name="@inputName" accept="image/*" hidden />
+                                        <img src="~/images/kamera.jpg" alt="Foto @i" style="opacity: 0.5;" />
+                                        <input type="file" id="@inputId" name="@inputName" accept="image/*" hidden onchange="handleFileSelect(event, @i)" />
                                     </label>
                                 </div>
                             }
-
                         </div>
+
+                        <div id="remove-last-photo" style="display:none; margin-top: 8px; font-weight: 400; cursor: pointer; color: black; user-select: none; font-size: 14px;">
+                            &#10005; Resmi Kaldır
+                        </div>
+
+                        <div id="selected-count-info" style="margin-top: 8px; font-size: 14px; font-weight: 600;">
+                            
+                        </div>
+
                         <small class="form-text text-muted mt-2 d-block">
-                            Hiç resim seçmediniz. (Max 5 MB dosya yükleyebilirsiniz.)
+                            (Max 5 MB dosya yükleyebilirsiniz.)
                         </small>
                     </div>
                 </div>
+
+
+
 
                 <!-- Kaydet Butonu -->
                 <div class="form-group row mb-3">
@@ -205,4 +216,75 @@
     });
 
     document.addEventListener('DOMContentLoaded', () => showPage(1));
+
+         const selectedFiles = {};
+
+    function handleFileSelect(event, index) {
+        const input = event.target;
+        const files = input.files;
+
+        if (files.length === 0) {
+            delete selectedFiles[index];
+            updateUI();
+            return;
+        }
+
+        const file = files[0];
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            selectedFiles[index] = {
+                file: file,
+                dataURL: e.target.result
+            };
+            updateUI();
+        };
+        reader.readAsDataURL(file);
+    }
+
+    function updateUI() {
+        const count = Object.keys(selectedFiles).length;
+        const selectedCountInfo = document.getElementById('selected-count-info');
+        const removeBtn = document.getElementById('remove-last-photo');
+
+        if (count === 0) {
+            selectedCountInfo.textContent = '';
+            removeBtn.style.display = 'none';
+        } else if (count === 1) {
+            selectedCountInfo.textContent = '1 adet fotoğraf seçildi';
+            removeBtn.style.display = 'block';
+        } else {
+            selectedCountInfo.textContent = count + ' adet fotoğraf seçildi';
+            removeBtn.style.display = 'block';
+        }
+
+        for (let i = 1; i <= 4; i++) {
+            const input = document.getElementById(`foto${i}`);
+            if (!input) continue;
+            const uploadBoxImg = input.closest('.upload-col').querySelector('label.upload-box img');
+
+            if (selectedFiles[i]) {
+                uploadBoxImg.style.opacity = '1';
+            } else {
+                uploadBoxImg.style.opacity = '0.5';
+            }
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        updateUI();
+
+        document.getElementById('remove-last-photo').addEventListener('click', () => {
+            const keys = Object.keys(selectedFiles).map(k => parseInt(k)).sort((a,b) => b - a);
+            if (keys.length === 0) return;
+
+            const lastKey = keys[0];
+            const input = document.getElementById(`foto${lastKey}`);
+            if (!input) return;
+
+            input.value = '';
+            delete selectedFiles[lastKey];
+            updateUI();
+        });
+    });
+
 </script>
