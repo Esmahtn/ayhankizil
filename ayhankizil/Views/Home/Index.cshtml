@@ -87,13 +87,16 @@
                         <div class="upload-row justify-content-between">
                             @for (int i = 1; i <= 4; i++)
                             {
+                                var inputId = $"foto{i}";
+                                var inputName = $"Foto{i}";
                                 <div class="upload-col">
-                                    <label for="foto@i" class="upload-box">
+                                    <label for="@inputId" class="upload-box">
                                         <img src="~/images/kamera.jpg" alt="Foto @i" />
-                                        <input type="file" id="foto@i" name="Foto@i" accept="image/*" hidden />
+                                        <input type="file" id="@inputId" name="@inputName" accept="image/*" hidden />
                                     </label>
                                 </div>
                             }
+
                         </div>
                         <small class="form-text text-muted mt-2 d-block">
                             Hiç resim seçmediniz. (Max 5 MB dosya yükleyebilirsiniz.)

@@ -16,6 +16,8 @@ namespace ayhankizil.Models
         [Required]
         public string? Icerik { get; set; }
 
+        public string? ResimYolu { get; set; }
+
         // Fotoğraf dosya adları veya yolları
         public string? Foto1 { get; set; }
         public string? Foto2 { get; set; }
