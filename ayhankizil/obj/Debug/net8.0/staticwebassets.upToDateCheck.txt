@@ -1,3 +1,4 @@
+wwwroot\css\style1.css
 wwwroot\data1\images\1.jpg
 wwwroot\data1\images\10.jpg
 wwwroot\data1\images\11.jpg
@@ -113,6 +114,7 @@ wwwroot\lib\jquery\dist\jquery.min.map
 wwwroot\lib\jquery\LICENSE.txt
 wwwroot\uploads\08a3b982-f03f-4f06-9275-691b5c9e5b4d.png
 wwwroot\uploads\45d21429-1512-4a23-a336-f831a36d234a.jpeg
+wwwroot\uploads\618ead18-948d-4bb3-9a40-1329c0d3f595.png
 wwwroot\uploads\6590abdb-34a8-4ed1-8a51-b8dc9cd9d1c7.jpg
 wwwroot\uploads\66614af4-0328-40fa-aec6-7f1795fd8d03.jpeg
-wwwroot\css\style1.css
+wwwroot\uploads\f590bbba-7879-4416-bb69-a3ddd00cbd7f.png
