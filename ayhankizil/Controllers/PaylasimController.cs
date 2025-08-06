@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ayhankizil.Data; // DbContext
-using ayhankizil.Models; // Paylasim model
+using ayhankizil.Data;
+using ayhankizil.Models;
 
 namespace ayhankizil.Controllers
 {
@@ -13,6 +13,7 @@ namespace ayhankizil.Controllers
             _context = context;
         }
 
+        // 📤 Paylaşım ekleme işlemi
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Ekle(string AdSoyad, string Email, string PaylasimMetni)
@@ -44,7 +45,6 @@ namespace ayhankizil.Controllers
                         dosya.CopyTo(stream);
                     }
 
-                    // Doğru model alanına ata
                     switch (i)
                     {
                         case 1: yeniPaylasim.Foto1 = "/uploads/" + dosyaAdi; break;
@@ -59,6 +59,13 @@ namespace ayhankizil.Controllers
             _context.SaveChanges();
 
             return RedirectToAction("Index", "Home");
+        }
+
+        // 📃 Verileri listeleyen method
+        public IActionResult Listele()
+        {
+            var paylasimlar = _context.Paylasimlar.ToList();
+            return View(paylasimlar);
         }
     }
 }
