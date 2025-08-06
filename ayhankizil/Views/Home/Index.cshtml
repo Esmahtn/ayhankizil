@@ -152,36 +152,43 @@
 
     <!-- Paylaşılan İçerikler -->
     <div id="paylasilan-icerikler">
-        <div class="paylasilan-kutu active" data-page="1">
-            <h3>Emine Özgün <span class="paylasilan-numara">#256</span></h3>
-            <p class="paylasilan-metin">hasret ve özlemle</p>
-        </div>
-        <div class="paylasilan-kutu active" data-page="1">
-            <h3>Çiğdem Bilgin <span class="paylasilan-numara">#151</span></h3>
-            <p class="paylasilan-metin">
-                Canım öğretmenim. Rektör olduğunuz dönemde okudum ve sizin çağdaş, kadın erkek eşitliği olan harika uygulamalarınızla okudum, kampüste kampusu yaşadım...
-                <br><br>
-                Nur içinde yat, mekanınız cennet olsun canım hocam. Aramızdan erken ayrılışınızı duyduğumda gözümden akan yaşlara hâkim olamadım.
-            </p>
-        </div>
-        <div class="paylasilan-kutu active" data-page="1">
-            <h3>İzzet Taşkıran <span class="paylasilan-numara">#123</span></h3>
-            <div class="paylasilan-icerik">
-                <div class="paylasilan-metin">
-                    Kızıl ailesinin hayatımda yeri ayrıdır. Rahmetli Prof. Ayhan Kızıl, babamın görüşme talebine olumlu yanıt verip Uludağ Üniversitesi'ne bağlı Fakültede tedaviye izin vermişti...
-                    <br><br> Her vakit duamda hatırlamaya devam ediyorum.
+        @if (Model != null && Model.Any())
+        {
+            foreach (var p in Model)
+            {
+                <div class="paylasilan-kutu active" data-page="1">
+                    <h3>@p.AdSoyad <span class="paylasilan-numara">#@p.Id</span></h3>
+
+                    <div class="paylasilan-icerik">
+                        <p class="paylasilan-metin">@p.Icerik</p>
+
+                        @* Fotoğraflar *@
+                        <div class="paylasilan-fotolar">
+                            @if (!string.IsNullOrEmpty(p.Foto1))
+                            {
+                                <img src="@p.Foto1" alt="Foto1" class="paylasilan-foto" />
+                            }
+                            @if (!string.IsNullOrEmpty(p.Foto2))
+                            {
+                                <img src="@p.Foto2" alt="Foto2" class="paylasilan-foto" />
+                            }
+                            @if (!string.IsNullOrEmpty(p.Foto3))
+                            {
+                                <img src="@p.Foto3" alt="Foto3" class="paylasilan-foto" />
+                            }
+                            @if (!string.IsNullOrEmpty(p.Foto4))
+                            {
+                                <img src="@p.Foto4" alt="Foto4" class="paylasilan-foto" />
+                            }
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <img src="~/images/sample-photo.jpg" alt="İzzet Taşkıran" class="paylasilan-foto" />
-                </div>
-            </div>
-        </div>
-        <div class="paylasilan-kutu" data-page="2">
-            <h3>Mehmet Yılmaz <span class="paylasilan-numara">#122</span></h3>
-            <p class="paylasilan-metin">
-                Sevgili hocamız, sizinle geçirdiğimiz günleri hiç unutmayacağız. Bilgi ve deneyimlerinizle hepimize yol gösterdiniz. Mekanınız cennet olsun.
-            </p>
-        </div>
+            }
+        }
+        else
+        {
+            <p class="text-center">Henüz paylaşım yapılmamış.</p>
+        }
     </div>
 
     <!-- Sayfalama -->

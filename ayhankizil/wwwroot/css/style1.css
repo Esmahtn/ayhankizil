@@ -16,15 +16,15 @@ body {
     max-width: 1200px;
     box-sizing: border-box;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    overflow: hidden; /* Taþmalarý önler */
+    overflow: hidden;
 }
 
-/* Ýç kutu (inner-box) - sadece üst içerik için */
+/* Ýç kutu (inner-box) */
 .inner-box {
     background: white;
     padding: 15px 100px;
     border: 2px solid #eee;
-    margin-bottom: 30px; /* Alt boþluk býrakýr */
+    margin-bottom: 30px;
 }
 
 /* Baþlýklar ve yazý ayarlarý */
@@ -86,16 +86,14 @@ h1 {
 }
 
 .selected-info {
-    font-size: 0.85rem; /* Metni biraz küçültüyor */
+    font-size: 0.85rem;
     color: #444;
     margin-top: 4px;
     text-align: center;
     transition: color 0.3s ease;
 }
 
-
-
-/* Responsive fotoðraf ve metin geniþlik ayarlarý */
+/* Responsive ayarlar */
 @media (min-width: 769px) and (max-width: 1100px) {
     .photo {
         width: 280px !important;
@@ -123,7 +121,6 @@ h1 {
         padding: 15px 20px;
     }
 
-    /* Formda satýr düzeni için */
     .form-group.row {
         flex-direction: column !important;
         display: flex !important;
@@ -167,7 +164,6 @@ h1 {
         padding: 15px 15px;
     }
 
-    /* Form mobil düzeni */
     .form-group.row {
         flex-direction: column !important;
         display: flex !important;
@@ -247,70 +243,57 @@ h1 {
         opacity: 0.50;
     }
 
-/* Paylaþýlanlar kutusu */
-.paylasilan-kutu {
-    width: 100%;
-    margin-left: 5px;
-    padding: 15px 0;
-    border-bottom: none;
-    font-family: 'Roboto', sans-serif;
-    position: relative;
-    display: none;
+.paylasim-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-    .paylasilan-kutu.active {
-        display: block;
+.paylasilan-kutu {
+    background: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+    .paylasilan-kutu:hover {
+        transform: translateY(-5px);
     }
 
-    .paylasilan-kutu::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 1px;
-        background-color: #ccc;
-    }
-
-    .paylasilan-kutu h3 {
-        font-size: 16px;
-        font-weight: 700;
-        margin: 0 0 5px;
-        color: #000;
-        text-align: left;
-        width: 100%;
-        box-sizing: border-box;
-    }
+.paylasim-foto {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+    border-radius: 8px;
+}
 
 .paylasilan-numara {
-    font-weight: normal;
-    color: #999;
-    font-size: 13px;
+    color: #777;
+    font-size: 0.9em;
     margin-left: 5px;
 }
 
 .paylasilan-metin {
-    font-size: 15px;
-    color: #333;
-    text-align: left;
-    line-height: 1.6;
-    margin-bottom: 0;
-    width: 50%;
+    margin-top: 10px;
+    font-size: 1em;
 }
 
-.paylasilan-icerik {
-    display: flex;
-    gap: 20px;
-    justify-content: space-between;
-    flex-wrap: wrap;
+.header-box {
+    max-width: 1200px;
+    margin: 20px auto;
+    background: #0288d1;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
 }
 
-.paylasilan-foto {
-    max-width: 120px;
-    border-radius: 4px;
-}
 
-/* Sayfalama butonlarý */
+/* Sayfalama */
 .pagination-container {
     display: flex;
     justify-content: flex-start;
@@ -356,6 +339,43 @@ h1 {
 /* WOW Slider container */
 #wowslider-container1 {
     max-width: 100%;
+    height: auto;
+    margin: 0 auto 30px auto;
+    position: relative;
+    z-index: 10;
     overflow: hidden;
-    margin-bottom: 30px;
+}
+
+.wowslider-container1 {
+    box-sizing: border-box;
+}
+
+.ws_images {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+
+    .ws_images img {
+        width: 100% !important;
+        height: auto !important;
+        display: block;
+        object-fit: cover;
+    }
+
+.ws_shadow {
+    display: none !important;
+}
+
+.ws-title {
+    font-size: 18px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    z-index: 20;
 }
