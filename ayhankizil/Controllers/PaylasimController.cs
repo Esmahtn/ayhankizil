@@ -61,11 +61,13 @@ namespace ayhankizil.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        // 📃 Verileri listeleyen method
         public IActionResult Listele()
         {
-            var paylasimlar = _context.Paylasimlar.ToList();
+            var paylasimlar = _context.Paylasimlar
+                                      .OrderByDescending(p => p.Id) // en yeniler üstte
+                                      .ToList();
             return View(paylasimlar);
         }
+
     }
 }

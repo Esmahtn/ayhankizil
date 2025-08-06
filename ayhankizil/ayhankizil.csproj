@@ -235,7 +235,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Paylasim\" />
     <Folder Include="wwwroot\uploads\" />
   </ItemGroup>
 

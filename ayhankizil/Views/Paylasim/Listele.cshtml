@@ -1,0 +1,44 @@
+﻿@model List<ayhankizil.Models.Paylasim>
+
+<!-- Paylaşılanlar Başlığı -->
+<div class="header-box text-center">
+    <h2>PAYLAŞILANLAR</h2>
+</div>
+
+<!-- Paylaşılan İçerikler -->
+<div id="paylasilan-icerikler">
+    @if (Model != null && Model.Any())
+    {
+        foreach (var p in Model)
+        {
+            <div class="paylasilan-kutu active" data-page="1">
+                <h3>@p.AdSoyad <span class="paylasilan-numara">#@p.Id</span></h3>
+                <p class="paylasilan-metin">@p.Icerik</p>
+
+                @* Fotoğraflar varsa göster *@
+                <div class="paylasilan-fotolar">
+                    @if (!string.IsNullOrEmpty(p.Foto1))
+                    {
+                        <img src="@p.Foto1" alt="Foto1" style="max-width:200px;" />
+                    }
+                    @if (!string.IsNullOrEmpty(p.Foto2))
+                    {
+                        <img src="@p.Foto2" alt="Foto2" style="max-width:200px;" />
+                    }
+                    @if (!string.IsNullOrEmpty(p.Foto3))
+                    {
+                        <img src="@p.Foto3" alt="Foto3" style="max-width:200px;" />
+                    }
+                    @if (!string.IsNullOrEmpty(p.Foto4))
+                    {
+                        <img src="@p.Foto4" alt="Foto4" style="max-width:200px;" />
+                    }
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <p class="text-center">Henüz paylaşım yapılmamış.</p>
+    }
+</div>
