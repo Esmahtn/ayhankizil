@@ -243,54 +243,9 @@ h1 {
         opacity: 0.50;
     }
 
-.paylasim-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
 
-.paylasilan-kutu {
-    background: white;
-    border: 1px solid #ccc;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 0 8px rgba(0,0,0,0.1);
-    transition: transform 0.2s;
-}
 
-    .paylasilan-kutu:hover {
-        transform: translateY(-5px);
-    }
 
-.paylasim-foto {
-    max-width: 100%;
-    height: auto;
-    margin-top: 10px;
-    border-radius: 8px;
-}
-
-.paylasilan-numara {
-    color: #777;
-    font-size: 0.9em;
-    margin-left: 5px;
-}
-
-.paylasilan-metin {
-    margin-top: 10px;
-    font-size: 1em;
-}
-
-.header-box {
-    max-width: 1200px;
-    margin: 20px auto;
-    background: #0288d1;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 10px;
-}
 
 
 /* Sayfalama */
