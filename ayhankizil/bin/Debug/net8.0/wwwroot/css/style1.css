@@ -334,3 +334,116 @@ h1 {
     left: 10px;
     z-index: 20;
 }
+.paylasim-kutusu {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 15px;
+}
+
+/* PAYLAÞILANLAR baþlýðýndan sonraki ilk kutuya boþluk */
+.header-box + .paylasim-kutusu {
+    margin-top: 20px;
+}
+
+
+
+.sol-icerik {
+    flex: 1 1 65%;
+    padding-right: 15px;
+}
+
+    .sol-icerik h3 {
+        margin: 0 0 10px 0;
+        font-size: 18px;
+        font-weight: bold;
+        color: #000;
+    }
+
+.paylasilan-numara {
+    font-weight: normal;
+    font-size: 14px;
+    color: gray;
+    margin-left: 5px;
+}
+
+.paylasilan-metin {
+    font-size: 15px;
+    line-height: 1.5;
+    text-align: justify;
+}
+
+.sag-fotolar {
+    flex: 0 0 35%;
+    display: flex;
+    gap: 5px;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-bottom: 15px;
+}
+
+    .sag-fotolar img {
+        border: 1px solid #ddd;
+        object-fit: cover;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+    }
+
+        .sag-fotolar img:hover {
+            transform: scale(1.03);
+        }
+
+.tek-foto {
+    max-width: 250px;
+    max-height: 250px;
+}
+
+.coklu-foto {
+    max-width: 120px;
+    max-height: 120px;
+}
+
+/* Modal için */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    backdrop-filter: blur(4px);
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 90%;
+    max-height: 90%;
+}
+
+    .modal-content img {
+        width: 100%;
+        height: auto;
+        border: 5px solid white;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+
+.close-modal {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 35px;
+    color: white;
+    cursor: pointer;
+}
+
+.paylasilan-fotolar img {
+    margin-bottom: 15px;
+}
