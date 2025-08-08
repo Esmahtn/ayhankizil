@@ -1,4 +1,5 @@
 ﻿@model List<ayhankizil.Models.Paylasim>
+
 <style>
     body {
         margin: 0;
@@ -6,113 +7,91 @@
         background: url('../images/back.jpg') repeat-y center;
         background-size: cover;
         color: #333;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-family: Arial, Helvetica, sans-serif;
     }
 
     .outer-box {
-        background: transparent;
-        border: none;
-        padding: 0;
-        margin: 20px auto;
         max-width: 1200px;
-        box-shadow: none;
-        border-radius: 0;
+        margin: 0 auto;
     }
 
-    .header-box {
-        background: linear-gradient(135deg, #1e88e5, #42a5f5);
-        text-align: center;
-        margin-bottom: 30px;
-        padding: 20px;
-        border-radius: 12px;
-    }
+   
 
-        .header-box h2 {
-            color: white;
-            font-weight: bold;
-            font-size: 30px;
-            margin: 0;
-            letter-spacing: 2px;
-        }
-
-    .inner-box {
-        background: white;
+    /* Burada metin ve foto yan yana olacak */
+    .paylasim-kutusu {
         display: flex;
-        justify-content: flex-start;
+        gap: 20px;
         align-items: flex-start;
-        border-bottom: 1px solid #e0e0e0;
-        padding: 25px 30px;
-        gap: 5px;
-        margin-bottom: 0;
+        margin-bottom: 30px;
+        border-bottom: 1px solid #ccc;
     }
-
-        .inner-box:last-child {
-            border-bottom: none;
-        }
 
     .sol-icerik {
-        flex: 2;
-        max-width: 65%;
+        flex: 1 1 65%;
+        padding-right: 15px;
     }
 
         .sol-icerik h3 {
-            font-size: 22px;
-            color: #2c3e50;
-            margin-bottom: 15px;
-            font-weight: 600;
+            margin: 0 0 10px 0;
+            font-size: 18px;
+            font-weight: bold;
+            color: #000;
         }
 
-        .sol-icerik .paylasilan-numara {
-            color: #7f8c8d;
-            font-size: 16px;
-            font-weight: normal;
-        }
-
-        .sol-icerik .paylasilan-metin {
-            font-size: 16px;
-            color: #34495e;
-            line-height: 1.6;
-            margin-top: 10px;
-            text-align: justify;
-        }
-
-    .sag-fotolar {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        flex: 1;
-        max-width: 35%;
-        justify-content: flex-start;
+    .paylasilan-numara {
+        font-weight: normal;
+        font-size: 14px;
+        color: gray;
+        margin-left: 5px;
     }
 
+    .paylasilan-metin {
+        font-size: 15px;
+        line-height: 1.5;
+        text-align: justify;
+    }
+
+    .sag-fotolar {
+        flex: 0 0 35%;
+        display: flex;
+        gap: 5px;
+        justify-content: flex-start;
+        align-items: center;
+        flex-wrap: wrap;
+        padding-bottom: 15px; /* Alt boşluk eklendi */
+    }s
+
         .sag-fotolar img {
-            max-width: 150px;
-            max-height: 150px;
-            height: auto;
-            width: auto;
-            object-fit: contain;
-            border-radius: 6px;
-            border: 1px solid #ecf0f1;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #ddd;
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.2s ease;
         }
 
             .sag-fotolar img:hover {
-                transform: scale(1.05);
-                box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-                cursor: pointer;
+                transform: scale(1.03);
             }
 
-    /* Modal Styles */
+    .tek-foto {
+        max-width: 250px;
+        max-height: 250px;
+    }
+
+    .coklu-foto {
+        max-width: 120px;
+        max-height: 120px;
+    }
+
     .modal {
         display: none;
         position: fixed;
-        z-index: 1000;
+        z-index: 9999;
         left: 0;
         top: 0;
         width: 100%;
         height: 100%;
         background-color: rgba(0,0,0,0.8);
-        backdrop-filter: blur(5px);
+        backdrop-filter: blur(4px);
     }
 
     .modal-content {
@@ -127,83 +106,55 @@
         .modal-content img {
             width: 100%;
             height: auto;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 5px solid white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
         }
 
     .close-modal {
         position: absolute;
-        top: 15px;
-        right: 25px;
-        color: white;
+        top: 20px;
+        right: 30px;
         font-size: 35px;
-        font-weight: bold;
+        color: white;
         cursor: pointer;
-        background: rgba(0,0,0,0.5);
-        border-radius: 50%;
-        width: 50px;
-        height: 50px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-        .close-modal:hover {
-            background: rgba(0,0,0,0.8);
-        }
-
-    .tek-foto {
-        max-width: 250px;
-        max-height: 250px;
     }
 
     .text-center {
         text-align: center;
-        color: #95a5a6;
-        font-style: italic;
-        font-size: 18px;
-        padding: 40px 0;
+        color: #777;
+        padding: 20px;
     }
 </style>
-<!-- Paylaşımlar Sayfası -->
+
 <div class="outer-box">
-    <div class="header-box">
-        <h2>PAYLAŞILANLAR</h2>
-    </div>
+   
+
     @if (Model != null && Model.Any())
     {
         @foreach (var p in Model)
         {
-            <div class="inner-box">
-                <!-- Sol İçerik -->
+            <div class="paylasim-kutusu">
                 <div class="sol-icerik">
                     <h3>@p.AdSoyad <span class="paylasilan-numara">#@p.Id</span></h3>
                     <p class="paylasilan-metin">@p.Icerik</p>
                 </div>
-                <!-- Sağ Fotoğraflar -->
+
                 <div class="sag-fotolar">
                     @{
-                        var fotoSayisi = 0;
-                        if (!string.IsNullOrEmpty(p.Foto1)) fotoSayisi++;
-                        if (!string.IsNullOrEmpty(p.Foto2)) fotoSayisi++;
-                        if (!string.IsNullOrEmpty(p.Foto3)) fotoSayisi++;
-                        if (!string.IsNullOrEmpty(p.Foto4)) fotoSayisi++;
+                        var fotolar = new List<string>();
+                        if (!string.IsNullOrEmpty(p.Foto1)) fotolar.Add(p.Foto1);
+                        if (!string.IsNullOrEmpty(p.Foto2)) fotolar.Add(p.Foto2);
+                        if (!string.IsNullOrEmpty(p.Foto3)) fotolar.Add(p.Foto3);
+                        if (!string.IsNullOrEmpty(p.Foto4)) fotolar.Add(p.Foto4);
+
+                        var tekFoto = fotolar.Count == 1;
                     }
-                    @if (!string.IsNullOrEmpty(p.Foto1))
+
+                    @foreach (var foto in fotolar)
                     {
-                        <img src="@p.Foto1" alt="Foto1" class="@(fotoSayisi == 1 ? "tek-foto" : "")" onclick="openModal('@p.Foto1')" />
-                    }
-                    @if (!string.IsNullOrEmpty(p.Foto2))
-                    {
-                        <img src="@p.Foto2" alt="Foto2" onclick="openModal('@p.Foto2')" />
-                    }
-                    @if (!string.IsNullOrEmpty(p.Foto3))
-                    {
-                        <img src="@p.Foto3" alt="Foto3" onclick="openModal('@p.Foto3')" />
-                    }
-                    @if (!string.IsNullOrEmpty(p.Foto4))
-                    {
-                        <img src="@p.Foto4" alt="Foto4" onclick="openModal('@p.Foto4')" />
+                        <img src="@foto" alt="Foto"
+                             class="@(tekFoto ? "tek-foto" : "coklu-foto")"
+                             onclick="openModal('@foto')" />
                     }
                 </div>
             </div>
@@ -215,7 +166,6 @@
     }
 </div>
 
-<!-- Modal -->
 <div id="imageModal" class="modal">
     <span class="close-modal" onclick="closeModal()">&times;</span>
     <div class="modal-content">
@@ -224,29 +174,19 @@
 </div>
 
 <script>
-    function openModal(imageSrc) {
-        document.getElementById('imageModal').style.display = 'block';
-        document.getElementById('modalImage').src = imageSrc;
-        document.body.style.overflow = 'hidden'; // Sayfayı kaydırmayı engelle
+    function openModal(src) {
+        document.getElementById("imageModal").style.display = "block";
+        document.getElementById("modalImage").src = src;
     }
 
     function closeModal() {
-        document.getElementById('imageModal').style.display = 'none';
-        document.body.style.overflow = 'auto'; // Sayfayı kaydırmayı geri aç
+        document.getElementById("imageModal").style.display = "none";
     }
 
-    // Modal dışına tıkladığında kapat
-    window.onclick = function(event) {
-        var modal = document.getElementById('imageModal');
+    window.onclick = function (event) {
+        var modal = document.getElementById("imageModal");
         if (event.target == modal) {
             closeModal();
         }
     }
-
-    // ESC tuşu ile kapat
-    document.addEventListener('keydown', function(event) {
-        if (event.key === 'Escape') {
-            closeModal();
-        }
-    });
 </script>
