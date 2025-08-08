@@ -334,6 +334,7 @@ h1 {
     left: 10px;
     z-index: 20;
 }
+/* Paylaþým kutusu ve görseller */
 .paylasim-kutusu {
     display: flex;
     gap: 20px;
@@ -341,13 +342,8 @@ h1 {
     margin-bottom: 30px;
     border-bottom: 1px solid #ccc;
     padding-bottom: 15px;
-}
 
-/* PAYLAÞILANLAR baþlýðýndan sonraki ilk kutuya boþluk */
-.header-box + .paylasim-kutusu {
-    margin-top: 20px;
 }
-
 
 
 .sol-icerik {
