@@ -1,4 +1,6 @@
-﻿@{
+﻿@model List<ayhankizil.Models.Paylasim>
+
+@{
     ViewData["Title"] = "Prof. Dr. Ayhan Kızıl";
 }
 
@@ -109,7 +111,6 @@
                         </div>
 
                         <div id="selected-count-info" style="margin-top: 8px; font-size: 14px; font-weight: 600;">
-                            
                         </div>
 
                         <small class="form-text text-muted mt-2 d-block">
@@ -117,9 +118,6 @@
                         </small>
                     </div>
                 </div>
-
-
-
 
                 <!-- Kaydet Butonu -->
                 <div class="form-group row mb-3">
@@ -156,31 +154,29 @@
         {
             foreach (var p in Model)
             {
-                <div class="paylasilan-kutu active" data-page="1">
-                    <h3>@p.AdSoyad <span class="paylasilan-numara">#@p.Id</span></h3>
-
-                    <div class="paylasilan-icerik">
+                <div class="paylasim-kutusu">
+                    <div class="sol-icerik">
+                        <h3>@p.AdSoyad <span class="paylasilan-numara">#@p.Id</span></h3>
                         <p class="paylasilan-metin">@p.Icerik</p>
+                    </div>
 
-                        @* Fotoğraflar *@
-                        <div class="paylasilan-fotolar">
-                            @if (!string.IsNullOrEmpty(p.Foto1))
-                            {
-                                <img src="@p.Foto1" alt="Foto1" class="paylasilan-foto" />
-                            }
-                            @if (!string.IsNullOrEmpty(p.Foto2))
-                            {
-                                <img src="@p.Foto2" alt="Foto2" class="paylasilan-foto" />
-                            }
-                            @if (!string.IsNullOrEmpty(p.Foto3))
-                            {
-                                <img src="@p.Foto3" alt="Foto3" class="paylasilan-foto" />
-                            }
-                            @if (!string.IsNullOrEmpty(p.Foto4))
-                            {
-                                <img src="@p.Foto4" alt="Foto4" class="paylasilan-foto" />
-                            }
-                        </div>
+                    <div class="sag-fotolar">
+                        @{
+                            var fotolar = new List<string>();
+                            if (!string.IsNullOrEmpty(p.Foto1)) fotolar.Add(p.Foto1);
+                            if (!string.IsNullOrEmpty(p.Foto2)) fotolar.Add(p.Foto2);
+                            if (!string.IsNullOrEmpty(p.Foto3)) fotolar.Add(p.Foto3);
+                            if (!string.IsNullOrEmpty(p.Foto4)) fotolar.Add(p.Foto4);
+
+                            bool tekFoto = fotolar.Count == 1;
+                        }
+
+                        @foreach (var foto in fotolar)
+                        {
+                            <img src="@foto" alt="Foto"
+                                 class="@(tekFoto ? "tek-foto" : "coklu-foto")"
+                                 onclick="openModal('@foto')" />
+                        }
                     </div>
                 </div>
             }
@@ -191,30 +187,16 @@
         }
     </div>
 
-    <!-- Sayfalama -->
-    <div class="pagination-container">
-        <button class="pagination-btn active" onclick="goToPage(1)">1</button>
-        <button class="pagination-btn" onclick="goToPage(2)">2</button>
+    <!-- Modal kısmı -->
+    <div id="imageModal" class="modal">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <div class="modal-content">
+            <img id="modalImage" src="" alt="Büyük Resim" />
+        </div>
     </div>
 </div>
 
 <script>
-    let currentPage = 1;
-    const totalPages = 2;
-
-    function showPage(page) {
-        document.querySelectorAll('.paylasilan-kutu').forEach(box => box.classList.remove('active'));
-        document.querySelectorAll(`[data-page="${page}"]`).forEach(box => box.classList.add('active'));
-
-        document.querySelectorAll('.pagination-btn').forEach(btn => btn.classList.remove('active'));
-        document.querySelector(`.pagination-btn[onclick="goToPage(${page})"]`).classList.add('active');
-        currentPage = page;
-    }
-
-    function goToPage(page) {
-        if (page >= 1 && page <= totalPages) showPage(page);
-    }
-
     // Form validasyon
     document.querySelector("form").addEventListener("submit", function (e) {
         e.preventDefault();
@@ -228,9 +210,23 @@
         if (valid) this.submit();
     });
 
-    document.addEventListener('DOMContentLoaded', () => showPage(1));
+    // Modal aç/kapa fonksiyonları
+    function openModal(src) {
+        document.getElementById("imageModal").style.display = "block";
+        document.getElementById("modalImage").src = src;
+    }
+    function closeModal() {
+        document.getElementById("imageModal").style.display = "none";
+    }
+    window.onclick = function (event) {
+        var modal = document.getElementById("imageModal");
+        if (event.target == modal) {
+            closeModal();
+        }
+    }
 
-         const selectedFiles = {};
+    // Fotoğraf seçimi UI güncelleme kodları
+    const selectedFiles = {};
 
     function handleFileSelect(event, index) {
         const input = event.target;
@@ -299,5 +295,110 @@
             updateUI();
         });
     });
-
 </script>
+
+<style>
+    /* Paylaşım kutusu ve görseller */
+    .paylasim-kutusu {
+        display: flex;
+        gap: 20px;
+        align-items: flex-start;
+        margin-bottom: 30px;
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 15px;
+    }
+
+    .sol-icerik {
+        flex: 1 1 65%;
+        padding-right: 15px;
+    }
+
+        .sol-icerik h3 {
+            margin: 0 0 10px 0;
+            font-size: 18px;
+            font-weight: bold;
+            color: #000;
+        }
+
+    .paylasilan-numara {
+        font-weight: normal;
+        font-size: 14px;
+        color: gray;
+        margin-left: 5px;
+    }
+
+    .paylasilan-metin {
+        font-size: 15px;
+        line-height: 1.5;
+        text-align: justify;
+    }
+
+    .sag-fotolar {
+        flex: 0 0 35%;
+        display: flex;
+        gap: 5px;
+        justify-content: flex-start;
+        align-items: center;
+        flex-wrap: wrap;
+        padding-bottom: 15px;
+    }
+
+        .sag-fotolar img {
+            border: 1px solid #ddd;
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+            .sag-fotolar img:hover {
+                transform: scale(1.03);
+            }
+
+    .tek-foto {
+        max-width: 250px;
+        max-height: 250px;
+    }
+
+    .coklu-foto {
+        max-width: 120px;
+        max-height: 120px;
+    }
+
+    /* Modal için */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.8);
+        backdrop-filter: blur(4px);
+    }
+
+    .modal-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        max-width: 90%;
+        max-height: 90%;
+    }
+
+        .modal-content img {
+            width: 100%;
+            height: auto;
+            border: 5px solid white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+    .close-modal {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        font-size: 35px;
+        color: white;
+        cursor: pointer;
+    }
+</style>
