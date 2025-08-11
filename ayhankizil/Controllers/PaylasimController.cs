@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ayhankizil.Data;
 using ayhankizil.Models;
+using System.IO;
+using System;
 
 namespace ayhankizil.Controllers
 {
@@ -13,7 +15,7 @@ namespace ayhankizil.Controllers
             _context = context;
         }
 
-        // 📤 Paylaşım ekleme işlemi
+        // Paylaşım ekleme işlemi
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Ekle(string AdSoyad, string Email, string PaylasimMetni)
@@ -30,7 +32,6 @@ namespace ayhankizil.Controllers
                 Icerik = PaylasimMetni
             };
 
-            // Fotoğrafları işle (Foto1 - Foto4)
             for (int i = 1; i <= 4; i++)
             {
                 var dosya = Request.Form.Files[$"Foto{i}"];
@@ -58,16 +59,8 @@ namespace ayhankizil.Controllers
             _context.Paylasimlar.Add(yeniPaylasim);
             _context.SaveChanges();
 
+            // Eklemeden sonra ana sayfaya yönlendir
             return RedirectToAction("Index", "Home");
         }
-
-        public IActionResult Listele()
-        {
-            var paylasimlar = _context.Paylasimlar
-                                      .OrderByDescending(p => p.Id) // en yeniler üstte
-                                      .ToList();
-            return View(paylasimlar);
-        }
-
     }
 }

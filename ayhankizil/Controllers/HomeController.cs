@@ -1,39 +1,41 @@
-using System.Diagnostics;
-using ayhankizil.Models;
 using Microsoft.AspNetCore.Mvc;
-using ayhankizil.Data;  // DbContext namespace
+using ayhankizil.Data;
+using ayhankizil.Models;
+using System;
 using System.Linq;
 
 namespace ayhankizil.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        private readonly ApplicationDbContext _db;  // DbContext
+        private readonly ApplicationDbContext _db;
 
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext db)
+        public HomeController(ApplicationDbContext db)
         {
-            _logger = logger;
             _db = db;
         }
 
-        public IActionResult Index()
+        // Sayfalý listeleme
+        public IActionResult Index(int page = 1)
         {
-            // Veritabanýndan paylaþýmlarý çek, ID'ye göre azalan sýrayla (yeni önce)
-            var paylasimlar = _db.Paylasimlar.OrderByDescending(p => p.Id).ToList();
+            int pageSize = 3; // sayfa baþýna paylaþým sayýsý
 
-            return View(paylasimlar);  // View'e model olarak gönder
-        }
+            int totalCount = _db.Paylasimlar.Count();
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+            var paylasimlar = _db.Paylasimlar
+                                .OrderByDescending(p => p.Id)
+                                .Skip((page - 1) * pageSize)
+                                .Take(pageSize)
+                                .ToList();
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var model = new PaylasimViewModel
+            {
+                Paylasimlar = paylasimlar,
+                CurrentPage = page,
+                TotalPages = (int)Math.Ceiling((double)totalCount / pageSize)
+            };
+
+            return View(model);
         }
     }
 }

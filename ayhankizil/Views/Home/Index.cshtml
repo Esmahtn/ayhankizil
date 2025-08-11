@@ -1,4 +1,5 @@
-﻿@model List<ayhankizil.Models.Paylasim>
+﻿@model ayhankizil.Models.PaylasimViewModel
+
 
 @{
     ViewData["Title"] = "Prof. Dr. Ayhan Kızıl";
@@ -146,14 +147,13 @@
     <!-- Paylaşılanlar Başlığı -->
     <div class="header-box text-center">
         <h2>PAYLAŞILANLAR</h2>
-	</div><br />
-
+    </div><br />
 
     <!-- Paylaşılan İçerikler -->
     <div id="paylasilan-icerikler">
-        @if (Model != null && Model.Any())
+        @if (Model.Paylasimlar != null && Model.Paylasimlar.Any())
         {
-            foreach (var p in Model)
+            foreach (var p in Model.Paylasimlar)
             {
                 <div class="paylasim-kutusu">
                     <div class="sol-icerik">
@@ -186,6 +186,18 @@
         {
             <p class="text-center">Henüz paylaşım yapılmamış.</p>
         }
+
+        <!-- Sayfalama -->
+        <div class="pagination-container">
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                <button class="pagination-btn @(i == Model.CurrentPage ? "active" : "")"
+                        onclick="location.href='?page=@i'">
+                    @i
+                </button>
+            }
+        </div>
+
     </div>
 
     <!-- Modal kısmı -->
