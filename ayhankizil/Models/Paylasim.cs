@@ -23,5 +23,8 @@ namespace ayhankizil.Models
         public string? Foto2 { get; set; }
         public string? Foto3 { get; set; }
         public string? Foto4 { get; set; }
+
+        // Onay durumu (false = onaysız, true = onaylı)
+        public bool Onayli { get; set; } = false;
     }
 }

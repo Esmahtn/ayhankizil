@@ -20,9 +20,12 @@ namespace ayhankizil.Controllers
         {
             int pageSize = 3; // sayfa baþýna paylaþým sayýsý
 
-            int totalCount = _db.Paylasimlar.Count();
+            // Sadece Onayli = true olanlarý sayýyoruz
+            int totalCount = _db.Paylasimlar.Count(p => p.Onayli);
 
+            // Sadece Onayli = true olanlarý getiriyoruz, sayfalama ile
             var paylasimlar = _db.Paylasimlar
+                                .Where(p => p.Onayli)
                                 .OrderByDescending(p => p.Id)
                                 .Skip((page - 1) * pageSize)
                                 .Take(pageSize)
@@ -37,5 +40,6 @@ namespace ayhankizil.Controllers
 
             return View(model);
         }
+
     }
 }
