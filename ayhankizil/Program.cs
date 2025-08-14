@@ -10,6 +10,14 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 // MVC servislerini ekle
 builder.Services.AddControllersWithViews();
 
+// Session servisini ekle
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // Session süresi
+    options.Cookie.HttpOnly = true;                 // Güvenlik için sadece HTTP eriþimi
+    options.Cookie.IsEssential = true;              // Zorunlu cookie olarak iþaretle
+});
+
 var app = builder.Build();
 
 // HTTP pipeline yapýlandýrmasý
@@ -23,6 +31,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+// Session middleware'ini ekle
+app.UseSession();
 
 app.UseAuthorization();
 
