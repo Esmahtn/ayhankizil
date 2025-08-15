@@ -2,60 +2,106 @@
 @{
     ViewData["Title"] = "Onay Bekleyen Paylaşımlar";
 }
-<div class="container mt-4">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2>Onay Bekleyen Paylaşımlar</h2>
-        <a class="btn btn-secondary" asp-action="Logout">Çıkış Yap</a>
-    </div>
 
-    @if (!Model.Any())
-    {
-        <div class="alert alert-info">Onay bekleyen paylaşım bulunmuyor.</div>
-    }
-    else
-    {
-        <div class="table-responsive">
-            <table class="table table-striped table-bordered align-middle">
-                <thead class="table-dark">
-                    <tr>
-                        <th>Ad Soyad</th>
-                        <th>Email</th>
-                        <th>İçerik</th>
-                        <th>Resimler</th>
-                        <th>İşlem</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var p in Model)
-                    {
+<div class="container mt-4">
+    <!-- Beyaz arkaplan kutu -->
+    <div class="bg-white p-3 rounded shadow-sm">
+        <!-- Başlık -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2>Onay Bekleyen Paylaşımlar</h2>
+            <form asp-action="Logout" method="post" style="display: inline;">
+                @Html.AntiForgeryToken()
+                <button type="submit" class="btn btn-secondary" style="border: none;">Çıkış Yap</button>
+            </form>
+        </div>
+
+        <!-- İçerik -->
+        @if (!Model.Any())
+        {
+            <div class="alert alert-info">Onay bekleyen paylaşım bulunmuyor.</div>
+        }
+        else
+        {
+            <!-- Masaüstü tablosu -->
+            <div class="table-responsive d-none d-md-block">
+                <table class="table table-striped table-bordered align-middle">
+                    <thead class="table-dark">
                         <tr>
-                            <td>@p.AdSoyad</td>
-                            <td>@p.Email</td>
-                            <td>@p.Icerik</td>
-                            <td>
+                            <th>Ad Soyad</th>
+                            <th>Email</th>
+                            <th>İçerik</th>
+                            <th>Resimler</th>
+                            <th>İşlem</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var p in Model)
+                        {
+                            <tr>
+                                <td>@p.AdSoyad</td>
+                                <td>@p.Email</td>
+                                <td>@p.Icerik</td>
+                                <td>
+                                    @if (!string.IsNullOrEmpty(p.Foto1))
+                                    {
+                                        <img src="@p.Foto1" class="img-thumbnail" style="max-width:80px;">
+                                    }
+                                    @if (!string.IsNullOrEmpty(p.Foto2))
+                                    {
+                                        <img src="@p.Foto2" class="img-thumbnail" style="max-width:80px;">
+                                    }
+                                </td>
+                                <td>
+                                    <form method="post" asp-action="Onayla" style="display:inline">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="id" value="@p.Id" />
+                                        <button type="submit" class="btn btn-success btn-sm">Onayla</button>
+                                    </form>
+                                    <form method="post" asp-action="Sil" style="display:inline">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="id" value="@p.Id" />
+                                        <button type="submit" class="btn btn-danger btn-sm">Sil</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Mobil görünüm -->
+            <div class="d-block d-md-none">
+                @foreach (var p in Model)
+                {
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title mb-1">@p.AdSoyad</h5>
+                            <p class="text-muted mb-2" style="word-break: break-word;">@p.Email</p>
+                            <p>@p.Icerik</p>
+                            <div class="mb-2">
                                 @if (!string.IsNullOrEmpty(p.Foto1))
                                 {
-                                    <img src="@p.Foto1" class="img-thumbnail" style="max-width:80px;">
+                                    <img src="@p.Foto1" class="img-thumbnail me-1" style="max-width:80px;">
                                 }
                                 @if (!string.IsNullOrEmpty(p.Foto2))
                                 {
                                     <img src="@p.Foto2" class="img-thumbnail" style="max-width:80px;">
                                 }
-                            </td>
-                            <td>
-                                <form method="post" asp-action="Onayla" style="display:inline">
-                                    <input type="hidden" name="id" value="@p.Id" />
-                                    <button type="submit" class="btn btn-success btn-sm">Onayla</button>
-                                </form>
-                                <form method="post" asp-action="Sil" style="display:inline">
-                                    <input type="hidden" name="id" value="@p.Id" />
-                                    <button type="submit" class="btn btn-danger btn-sm">Sil</button>
-                                </form>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-    }
+                            </div>
+                            <form method="post" asp-action="Onayla" style="display:inline">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="id" value="@p.Id" />
+                                <button type="submit" class="btn btn-success btn-sm">Onayla</button>
+                            </form>
+                            <form method="post" asp-action="Sil" style="display:inline">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="id" value="@p.Id" />
+                                <button type="submit" class="btn btn-danger btn-sm">Sil</button>
+                            </form>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
 </div>

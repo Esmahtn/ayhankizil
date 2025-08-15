@@ -10,5 +10,7 @@ namespace ayhankizil.Data
         }
 
         public DbSet<Paylasim> Paylasimlar { get; set; }
+        // Data/ApplicationDbContext.cs
+        public DbSet<Admin> Admins { get; set; }
     }
 }
