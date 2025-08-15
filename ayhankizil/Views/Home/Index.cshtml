@@ -1,6 +1,5 @@
 ﻿@model ayhankizil.Models.PaylasimViewModel
 
-
 @{
     ViewData["Title"] = "Prof. Dr. Ayhan Kızıl";
 }
@@ -187,12 +186,12 @@
             <p class="text-center">Henüz paylaşım yapılmamış.</p>
         }
 
-        <!-- Sayfalama -->
+        <!-- Sayfalama - GÜNCELLENMIŞ -->
         <div class="pagination-container">
             @for (int i = 1; i <= Model.TotalPages; i++)
             {
-                <button class="pagination-btn @(i == Model.CurrentPage ? "active" : "")"
-                        onclick="location.href='?page=@i'">
+                <button type="button" class="pagination-btn @(i == Model.CurrentPage ? "active" : "")"
+                        onclick="loadPage(@i); return false;">
                     @i
                 </button>
             }
@@ -306,6 +305,87 @@
             input.value = '';
             delete selectedFiles[lastKey];
             updateUI();
+        });
+    });
+
+    // SAYFALAMA FONKSİYONLARI - URL DEĞİŞTİRMEDEN
+    function loadPage(pageNumber) {
+        console.log('loadPage çağrıldı, sayfa:', pageNumber);
+
+        // Sayfa yüklenirken loading göster
+        const container = document.querySelector('#paylasilan-icerikler');
+        container.style.opacity = '0.7';
+
+        // Controller ve Action adını dinamik olarak al (URL parametresi OLMADAN)
+        const currentPath = window.location.pathname; // Sadece path, parametre yok
+        const fetchUrl = `${currentPath}?page=${pageNumber}`;
+
+        console.log('Fetch URL:', fetchUrl);
+
+        // AJAX ile sayfa verilerini yükle
+        fetch(fetchUrl, {
+            method: 'GET',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'Accept': 'text/html'
+            }
+        })
+        .then(response => {
+            console.log('Response alındı:', response.status);
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+            }
+            return response.text();
+        })
+        .then(html => {
+            console.log('HTML alındı, parse ediliyor...');
+
+            // Sadece paylaşılan içerikler kısmını güncelle
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            const newContent = doc.querySelector('#paylasilan-icerikler');
+
+            if (newContent) {
+                document.querySelector('#paylasilan-icerikler').innerHTML = newContent.innerHTML;
+                console.log('İçerik güncellendi');
+
+                // Aktif sayfa butonunu güncelle
+                document.querySelectorAll('.pagination-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                    if (parseInt(btn.textContent) === pageNumber) {
+                        btn.classList.add('active');
+                    }
+                });
+            }
+
+            // URL'yi GÜNCELLEME! Aynı URL'de kal
+            // window.history.pushState({}, '', url); // Bu satırı kaldırdık
+
+            // Loading'i kaldır
+            container.style.opacity = '1';
+        })
+        .catch(error => {
+            console.error('Sayfa yüklenirken hata:', error);
+            container.style.opacity = '1';
+            alert('Sayfa yüklenirken hata oluştu: ' + error.message);
+        });
+
+        return false;
+    }
+
+    // Geri/İleri buton desteği KALDIRILDI - URL değişmediği için gerek yok
+
+    // Sayfa ilk yüklendiğinde URL'deki page parametresini kontrol et
+    document.addEventListener('DOMContentLoaded', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const currentPage = urlParams.get('page') || 1;
+
+        // Aktif sayfa butonunu güncelle
+        document.querySelectorAll('.pagination-btn').forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.textContent == currentPage) {
+                btn.classList.add('active');
+            }
         });
     });
 </script>
