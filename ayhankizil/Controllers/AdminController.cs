@@ -74,7 +74,7 @@ namespace ayhankizil.Controllers
             }
         }
 
-        // Yorum yönetimi
+        // Yorum yönetimi - Tüm yorumları (onaylı ve bekleyen) göster
         public async Task<IActionResult> Index()
         {
             if (!IsAdmin())
@@ -82,10 +82,11 @@ namespace ayhankizil.Controllers
 
             try
             {
-                var yorumlar = await _db.Paylasimlar
-                                  .OrderByDescending(p => p.Id)
-                                  .ToListAsync();
-                return View(yorumlar);
+                var paylasimlar = await _db.Paylasimlar
+                                    .OrderByDescending(p => p.Id)
+                                    .ToListAsync();
+                
+                return View(paylasimlar);
             }
             catch (Exception ex)
             {
