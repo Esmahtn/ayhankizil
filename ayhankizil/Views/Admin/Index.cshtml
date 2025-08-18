@@ -37,7 +37,7 @@
                     <tbody>
                         @foreach (var p in Model)
                         {
-                            <tr>
+                            <tr id="row-@p.Id">
                                 <td>@p.AdSoyad</td>
                                 <td>@p.Email</td>
                                 <td>@p.Icerik</td>
@@ -52,15 +52,21 @@
                                     }
                                 </td>
                                 <td>
-                                    <form method="post" asp-action="Onayla" style="display:inline">
+                                    <form method="post" asp-action="Onayla" style="display:inline" onsubmit="handleButtonClick(event, 'approve', @p.Id)">
                                         @Html.AntiForgeryToken()
                                         <input type="hidden" name="id" value="@p.Id" />
-                                        <button type="submit" class="btn btn-success btn-sm">Onayla</button>
+                                        <button type="submit" class="btn btn-success btn-sm action-btn" id="approve-@p.Id" style="transition: all 0.3s ease; min-width: 70px;">
+                                            <span class="btn-text">Onayla</span>
+                                            <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                        </button>
                                     </form>
-                                    <form method="post" asp-action="Sil" style="display:inline">
+                                    <form method="post" asp-action="Sil" style="display:inline" onsubmit="handleButtonClick(event, 'delete', @p.Id)">
                                         @Html.AntiForgeryToken()
                                         <input type="hidden" name="id" value="@p.Id" />
-                                        <button type="submit" class="btn btn-danger btn-sm">Sil</button>
+                                        <button type="submit" class="btn btn-danger btn-sm action-btn" id="delete-@p.Id" style="transition: all 0.3s ease; min-width: 70px;">
+                                            <span class="btn-text">Sil</span>
+                                            <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                        </button>
                                     </form>
                                 </td>
                             </tr>
@@ -73,7 +79,7 @@
             <div class="d-block d-md-none">
                 @foreach (var p in Model)
                 {
-                    <div class="card mb-3">
+                    <div class="card mb-3" id="card-@p.Id">
                         <div class="card-body">
                             <h5 class="card-title mb-1">@p.AdSoyad</h5>
                             <p class="text-muted mb-2" style="word-break: break-word;">@p.Email</p>
@@ -88,15 +94,21 @@
                                     <img src="@p.Foto2" class="img-thumbnail" style="max-width:80px;">
                                 }
                             </div>
-                            <form method="post" asp-action="Onayla" style="display:inline">
+                            <form method="post" asp-action="Onayla" style="display:inline" onsubmit="handleButtonClick(event, 'approve', @p.Id)">
                                 @Html.AntiForgeryToken()
                                 <input type="hidden" name="id" value="@p.Id" />
-                                <button type="submit" class="btn btn-success btn-sm">Onayla</button>
+                                <button type="submit" class="btn btn-success btn-sm action-btn" id="approve-mobile-@p.Id" style="transition: all 0.3s ease; min-width: 70px;">
+                                    <span class="btn-text">Onayla</span>
+                                    <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                </button>
                             </form>
-                            <form method="post" asp-action="Sil" style="display:inline">
+                            <form method="post" asp-action="Sil" style="display:inline" onsubmit="handleButtonClick(event, 'delete', @p.Id)">
                                 @Html.AntiForgeryToken()
                                 <input type="hidden" name="id" value="@p.Id" />
-                                <button type="submit" class="btn btn-danger btn-sm">Sil</button>
+                                <button type="submit" class="btn btn-danger btn-sm action-btn" id="delete-mobile-@p.Id" style="transition: all 0.3s ease; min-width: 70px;">
+                                    <span class="btn-text">Sil</span>
+                                    <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                </button>
                             </form>
                         </div>
                     </div>
@@ -105,3 +117,85 @@
         }
     </div>
 </div>
+
+
+
+<script>
+    function handleButtonClick(event, action, id) {
+        // Form submit'ini durdur
+        event.preventDefault();
+
+        // Button elementlerini bul
+        const desktopBtn = document.getElementById(action === 'approve' ? `approve-${id}` : `delete-${id}`);
+        const mobileBtn = document.getElementById(action === 'approve' ? `approve-mobile-${id}` : `delete-mobile-${id}`);
+
+        // Her iki button için de işlemi uygula
+        [desktopBtn, mobileBtn].filter(btn => btn).forEach(button => {
+            // Loading durumunu başlat
+            button.classList.add('loading');
+            button.disabled = true;
+
+            // Spinner'ı göster, text'i gizle
+            const spinner = button.querySelector('.spinner-border');
+            const text = button.querySelector('.btn-text');
+
+            if (spinner) spinner.classList.remove('d-none');
+            if (text) text.style.opacity = '0.5';
+        });
+
+        // Satır veya kartı bul
+        const row = document.getElementById(`row-${id}`);
+        const card = document.getElementById(`card-${id}`);
+
+        // İşlem tipine göre renk değişikliği
+        setTimeout(() => {
+            [desktopBtn, mobileBtn].filter(btn => btn).forEach(button => {
+                const spinner = button.querySelector('.spinner-border');
+                const text = button.querySelector('.btn-text');
+
+                // Spinner'ı gizle
+                if (spinner) spinner.classList.add('d-none');
+
+                if (action === 'approve') {
+                    button.style.backgroundColor = '#28a745';
+                    button.style.borderColor = '#28a745';
+                    button.style.transform = 'scale(1.05)';
+                    if (text) {
+                        text.textContent = 'Onaylandı!';
+                        text.style.opacity = '1';
+                    }
+                } else {
+                    button.style.backgroundColor = '#dc3545';
+                    button.style.borderColor = '#dc3545';
+                    button.style.transform = 'scale(1.05)';
+                    if (text) {
+                        text.textContent = 'Silindi!';
+                        text.style.opacity = '1';
+                    }
+                }
+
+                button.disabled = true;
+            });
+
+            // Satır/kartı fade out yap
+            if (row) {
+                row.style.opacity = '0.5';
+                row.style.transform = 'scale(0.98)';
+                row.style.transition = 'all 0.5s ease-in-out';
+            }
+            if (card) {
+                card.style.opacity = '0.5';
+                card.style.transform = 'scale(0.98)';
+                card.style.transition = 'all 0.5s ease-in-out';
+            }
+
+            // 1 saniye sonra formu submit et
+            setTimeout(() => {
+                event.target.submit();
+            }, 1000);
+
+        }, 800); // 800ms loading süresi
+
+        return false;
+    }
+</script>
