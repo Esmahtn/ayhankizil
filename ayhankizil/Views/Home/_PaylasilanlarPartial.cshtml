@@ -1,0 +1,57 @@
+﻿@model ayhankizil.Models.PaylasimViewModel
+
+<div id="paylasilan-icerikler">
+    @if (Model.Paylasimlar != null && Model.Paylasimlar.Any())
+    {
+        foreach (var p in Model.Paylasimlar)
+        {
+            <div class="paylasim-kutusu">
+                <div class="sol-icerik">
+                    <h3 class="mb-1">
+                        @p.AdSoyad
+                        <span class="text-muted" style="font-weight:400; margin-left:6px; font-size:0.9rem;">
+                            #@p.Id
+                            <span style="font-size:0.8rem;">(@p.EklenmeTarihi.ToString("dd.MM.yyyy HH:mm"))</span>
+                        </span>
+                    </h3>
+
+                    <p class="paylasilan-metin">@p.Icerik</p>
+                </div>
+
+                <div class="sag-fotolar">
+                    @{
+                        var fotolar = new List<string>();
+                        if (!string.IsNullOrEmpty(p.Foto1)) fotolar.Add(p.Foto1);
+                        if (!string.IsNullOrEmpty(p.Foto2)) fotolar.Add(p.Foto2);
+                        if (!string.IsNullOrEmpty(p.Foto3)) fotolar.Add(p.Foto3);
+                        if (!string.IsNullOrEmpty(p.Foto4)) fotolar.Add(p.Foto4);
+
+                        bool tekFoto = fotolar.Count == 1;
+                    }
+
+                    @foreach (var foto in fotolar)
+                    {
+                        <img src="@foto" alt="Foto"
+                             class="@(tekFoto ? "tek-foto" : "coklu-foto")"
+                             onclick="openModal('@foto')" />
+                    }
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <p class="text-center">Henüz paylaşım yapılmamış.</p>
+    }
+
+    <!-- Sayfalama -->
+    <div class="pagination-container">
+        @for (int i = 1; i <= Model.TotalPages; i++)
+        {
+            <button type="button" class="pagination-btn @(i == Model.CurrentPage ? "active" : "")"
+                    onclick="loadPage(@i); return false;">
+                @i
+            </button>
+        }
+    </div>
+</div>

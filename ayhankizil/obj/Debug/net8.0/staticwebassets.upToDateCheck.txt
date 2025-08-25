@@ -121,6 +121,7 @@ wwwroot\uploads\2ca5b10d-c231-4496-8aec-b4dbcf95d062.png
 wwwroot\uploads\4459936d-9186-4729-9b14-22e24153a298.jpg
 wwwroot\uploads\45d21429-1512-4a23-a336-f831a36d234a.jpeg
 wwwroot\uploads\4bd17f08-ac86-46dc-8c1a-f01c6faceea1.jpg
+wwwroot\uploads\5245cdfa-647a-44e9-a657-a42870f86f8b.png
 wwwroot\uploads\5a6ee7ed-90f6-4d1f-b8f5-54b15805d9f5.jpg
 wwwroot\uploads\618ead18-948d-4bb3-9a40-1329c0d3f595.png
 wwwroot\uploads\6590abdb-34a8-4ed1-8a51-b8dc9cd9d1c7.jpg
