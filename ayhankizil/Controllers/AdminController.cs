@@ -74,7 +74,7 @@ namespace ayhankizil.Controllers
             }
         }
 
-        // Yorum yönetimi - Tüm yorumları (onaylı ve bekleyen) göster
+        // TÜM PAYLASIMALRI GÖSTER - HEM ONAYLI HEM ONAYSIZ
         public async Task<IActionResult> Index()
         {
             if (!IsAdmin())
@@ -82,15 +82,16 @@ namespace ayhankizil.Controllers
 
             try
             {
-                var paylasimlar = await _db.Paylasimlar
-                                    .OrderByDescending(p => p.Id)
-                                    .ToListAsync();
-                
-                return View(paylasimlar);
+                // TÜM paylaşımları getir (hem onaylı hem onaysız)
+                var tumPaylasimlar = await _db.Paylasimlar
+                                        .OrderByDescending(p => p.Id)
+                                        .ToListAsync();
+
+                return View(tumPaylasimlar);
             }
             catch (Exception ex)
             {
-                TempData["Error"] = "Yorumlar yüklenirken bir hata oluştu.";
+                TempData["Error"] = "Paylaşımlar yüklenirken bir hata oluştu.";
                 return View(new List<Paylasim>());
             }
         }
@@ -107,18 +108,48 @@ namespace ayhankizil.Controllers
                 var yorum = await _db.Paylasimlar.FindAsync(id);
                 if (yorum != null)
                 {
-                    yorum.Onayli = true;
+                    yorum.Onayli = true; // Onaylandı olarak işaretle
                     await _db.SaveChangesAsync();
-                    TempData["Success"] = "Yorum başarıyla onaylandı!";
+                    TempData["Success"] = "Paylaşım başarıyla onaylandı!";
                 }
                 else
                 {
-                    TempData["Error"] = "Yorum bulunamadı!";
+                    TempData["Error"] = "Paylaşım bulunamadı!";
                 }
             }
             catch (Exception ex)
             {
-                TempData["Error"] = "Yorum onaylanırken bir hata oluştu.";
+                TempData["Error"] = "Paylaşım onaylanırken bir hata oluştu.";
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        // YENİ: ONAYDAN KALDIRMA FONKSİYONU
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> OnayKaldir(int id)
+        {
+            if (!IsAdmin())
+                return RedirectToAction("Login");
+
+            try
+            {
+                var yorum = await _db.Paylasimlar.FindAsync(id);
+                if (yorum != null)
+                {
+                    yorum.Onayli = false; // Onaydan kaldır
+                    await _db.SaveChangesAsync();
+                    TempData["Success"] = "Paylaşım onaydan kaldırıldı!";
+                }
+                else
+                {
+                    TempData["Error"] = "Paylaşım bulunamadı!";
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = "İşlem gerçekleştirilirken bir hata oluştu.";
             }
 
             return RedirectToAction("Index");
@@ -136,24 +167,37 @@ namespace ayhankizil.Controllers
                 var yorum = await _db.Paylasimlar.FindAsync(id);
                 if (yorum != null)
                 {
+                    // Fotoğrafları da sil
+                    var fotolar = new[] { yorum.Foto1, yorum.Foto2, yorum.Foto3, yorum.Foto4 };
+                    foreach (var foto in fotolar.Where(f => !string.IsNullOrEmpty(f)))
+                    {
+                        var dosyaYolu = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", foto.TrimStart('/'));
+                        if (System.IO.File.Exists(dosyaYolu))
+                        {
+                            System.IO.File.Delete(dosyaYolu);
+                        }
+                    }
+
                     _db.Paylasimlar.Remove(yorum);
                     await _db.SaveChangesAsync();
-                    TempData["Success"] = "Yorum başarıyla silindi!";
+                    TempData["Success"] = "Paylaşım başarıyla silindi!";
                 }
                 else
                 {
-                    TempData["Error"] = "Yorum bulunamadı!";
+                    TempData["Error"] = "Paylaşım bulunamadı!";
                 }
             }
             catch (Exception ex)
             {
-                TempData["Error"] = "Yorum silinirken bir hata oluştu.";
+                TempData["Error"] = "Paylaşım silinirken bir hata oluştu.";
             }
 
             return RedirectToAction("Index");
         }
 
-        // Çıkış yap - GET ve POST kabul eder
+        // Çıkış yap
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();

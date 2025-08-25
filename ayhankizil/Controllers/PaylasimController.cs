@@ -18,49 +18,89 @@ namespace ayhankizil.Controllers
         // Paylaşım ekleme işlemi
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Ekle(string AdSoyad, string Email, string PaylasimMetni)
+        public async Task<IActionResult> Ekle(string AdSoyad, string Email, string PaylasimMetni)
         {
-            if (string.IsNullOrWhiteSpace(AdSoyad) || string.IsNullOrWhiteSpace(PaylasimMetni))
+            try
             {
-                return BadRequest("Ad Soyad ve Paylaşım metni boş bırakılamaz.");
-            }
-
-            var yeniPaylasim = new Paylasim
-            {
-                AdSoyad = AdSoyad,
-                Email = Email,
-                Icerik = PaylasimMetni
-            };
-
-            for (int i = 1; i <= 4; i++)
-            {
-                var dosya = Request.Form.Files[$"Foto{i}"];
-                if (dosya != null && dosya.Length > 0)
+                if (string.IsNullOrWhiteSpace(AdSoyad) || string.IsNullOrWhiteSpace(PaylasimMetni))
                 {
-                    var uzanti = Path.GetExtension(dosya.FileName);
-                    var dosyaAdi = $"{Guid.NewGuid()}{uzanti}";
-                    var yuklemeYolu = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", dosyaAdi);
+                    TempData["Error"] = "Ad Soyad ve Paylaşım metni boş bırakılamaz.";
+                    return RedirectToAction("Index", "Home");
+                }
 
-                    using (var stream = new FileStream(yuklemeYolu, FileMode.Create))
-                    {
-                        dosya.CopyTo(stream);
-                    }
+                var yeniPaylasim = new Paylasim
+                {
+                    AdSoyad = AdSoyad.Trim(),
+                    Email = Email?.Trim(),
+                    Icerik = PaylasimMetni.Trim(),
+                    Onayli = false, // Yeni eklenen paylaşımlar onaysız olarak eklensin
+                    EklenmeTarihi = DateTime.Now // TARİH OTOMATİK EKLENİYOR
 
-                    switch (i)
+                };
+
+                // Uploads klasörünün var olduğundan emin ol
+                var uploadsPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
+                if (!Directory.Exists(uploadsPath))
+                {
+                    Directory.CreateDirectory(uploadsPath);
+                }
+
+                // Fotoğrafları işle
+                for (int i = 1; i <= 4; i++)
+                {
+                    var dosya = Request.Form.Files[$"Foto{i}"];
+                    if (dosya != null && dosya.Length > 0)
                     {
-                        case 1: yeniPaylasim.Foto1 = "/uploads/" + dosyaAdi; break;
-                        case 2: yeniPaylasim.Foto2 = "/uploads/" + dosyaAdi; break;
-                        case 3: yeniPaylasim.Foto3 = "/uploads/" + dosyaAdi; break;
-                        case 4: yeniPaylasim.Foto4 = "/uploads/" + dosyaAdi; break;
+                        // Dosya boyutu kontrolü (5MB = 5 * 1024 * 1024 bytes)
+                        if (dosya.Length > 5 * 1024 * 1024)
+                        {
+                            TempData["Error"] = $"Foto{i} çok büyük. Maksimum 5MB olabilir.";
+                            return RedirectToAction("Index", "Home");
+                        }
+
+                        // Dosya uzantısı kontrolü
+                        var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif", ".bmp" };
+                        var uzanti = Path.GetExtension(dosya.FileName).ToLowerInvariant();
+
+                        if (!allowedExtensions.Contains(uzanti))
+                        {
+                            TempData["Error"] = $"Foto{i} geçersiz format. Sadece resim dosyaları kabul edilir.";
+                            return RedirectToAction("Index", "Home");
+                        }
+
+                        var dosyaAdi = $"{Guid.NewGuid()}{uzanti}";
+                        var yuklemeYolu = Path.Combine(uploadsPath, dosyaAdi);
+
+                        using (var stream = new FileStream(yuklemeYolu, FileMode.Create))
+                        {
+                            await dosya.CopyToAsync(stream);
+                        }
+
+                        // Dosya yolunu modele ata
+                        switch (i)
+                        {
+                            case 1: yeniPaylasim.Foto1 = "/uploads/" + dosyaAdi; break;
+                            case 2: yeniPaylasim.Foto2 = "/uploads/" + dosyaAdi; break;
+                            case 3: yeniPaylasim.Foto3 = "/uploads/" + dosyaAdi; break;
+                            case 4: yeniPaylasim.Foto4 = "/uploads/" + dosyaAdi; break;
+                        }
                     }
                 }
+
+                _context.Paylasimlar.Add(yeniPaylasim);
+                await _context.SaveChangesAsync();
+
+                // Başarı mesajı ekle
+                TempData["Success"] = "Paylaşımınız gönderildi. Onaylandıktan sonra yayınlanacaktır.";
+
+                // Eklemeden sonra ana sayfaya yönlendir
+                return RedirectToAction("Index", "Home");
             }
-
-            _context.Paylasimlar.Add(yeniPaylasim);
-            _context.SaveChanges();
-
-            // Eklemeden sonra ana sayfaya yönlendir
-            return RedirectToAction("Index", "Home");
+            catch (Exception ex)
+            {
+                TempData["Error"] = "Paylaşım eklenirken bir hata oluştu. Lütfen tekrar deneyin.";
+                return RedirectToAction("Index", "Home");
+            }
         }
     }
 }
