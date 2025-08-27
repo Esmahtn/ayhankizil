@@ -70,7 +70,7 @@ h1 {
     justify-content: center;
 }
 
-/* Profil fotoðrafý */
+
 .photo {
     width: 330px;
     height: auto;
@@ -448,11 +448,11 @@ h1 {
 
 .modal-content {
     position: absolute;
-    top: 50%;
+    top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
-    max-width: 90%;
-    max-height: 90%;
+    max-width: 40vw; /* Ekranýn %90’ýný geçmesin */
+    max-height: 40vh; /* Ekranýn %90’ýný geçmesin */
 }
 
     .modal-content img {
