@@ -443,3 +443,22 @@ h1 {
 .paylasilan-fotolar img {
     margin-bottom: 15px;
 }
+
+/* Orta ve küçük ekranlarda paylaþýmlar alt alta gelsin */
+@media (max-width: 992px) {
+    .paylasim-kutusu {
+        flex-direction: column;
+    }
+
+    .sol-icerik {
+        flex: 1 1 100%;
+        padding-right: 0;
+        margin-bottom: 15px;
+    }
+
+    .sag-fotolar {
+        flex: 1 1 100%;
+        justify-content: flex-start;
+    }
+}
+s
