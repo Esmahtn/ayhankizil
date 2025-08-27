@@ -1,3 +1,4 @@
+wwwroot\css\style1.css
 wwwroot\data1\images\1.jpg
 wwwroot\data1\images\10.jpg
 wwwroot\data1\images\11.jpg
@@ -135,4 +136,3 @@ wwwroot\uploads\a55e4830-b337-42fa-bd61-cb67a497ebde.jpg
 wwwroot\uploads\bd1b084f-687d-4ecb-a873-86ad8693e3f7.jpg
 wwwroot\uploads\d4288b69-9018-433f-86e2-aa1d82f9f8f0.jpg
 wwwroot\uploads\f590bbba-7879-4416-bb69-a3ddd00cbd7f.png
-wwwroot\css\style1.css
