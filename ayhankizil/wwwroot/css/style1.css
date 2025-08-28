@@ -115,14 +115,36 @@ h1 {
 }
 
 /* Responsive ayarlar */
-@media (min-width: 769px) and (max-width: 1100px) {
+
+@media (min-width: 769px) and (max-width: 1368px) {
     .photo {
-        width: 280px !important;
+        width: 180px !important;
     }
 
     .text {
         max-width: 400px !important;
     }
+    body, .text, .paylasilan-metin, .paylasilan-numara, .sol-kutu-yazi {
+        font-size: 24px !important;
+    }
+    h1 {
+        font-size: 38px !important;
+    }
+    .inner-box {
+        padding-left: 15px; /* soldan büyük padding kaldýrýldý */
+        padding-right: 100px; /* saðdan boþluðu koruyabilirsin */
+    }
+
+        .inner-box .content {
+            justify-content: flex-start;
+            gap: 20px; /* içerikler arasý boþluðu küçülttüm, isteðe göre artýrabilirsin */
+        }
+
+    .photo {
+        width: 180px !important;
+        margin-left: 0; /* ekstra boþluk varsa kaldýr */
+    }
+
 }
 
 @media (min-width: 577px) and (max-width: 768px) {
@@ -178,15 +200,15 @@ h1 {
     }
 
     body, .text, .paylasilan-metin, .paylasilan-numara, .sol-kutu-yazi {
-        font-size: 17px !important;
+        font-size: 23px !important;
     }
 
     h1 {
-        font-size: 30px !important;
+        font-size: 32px !important;
     }
 
     .sol-icerik h3 {
-        font-size: 19px !important;
+        font-size: 22px !important;
     }
 
     body {
