@@ -448,11 +448,11 @@ h1 {
 
 .modal-content {
     position: absolute;
-    top: 20%;
+    top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
-    max-width: 40vw; /* Ekranýn %90’ýný geçmesin */
-    max-height: 40vh; /* Ekranýn %90’ýný geçmesin */
+    max-width: 45svw; /* Ekranýn %90’ýný geçmesin */
+    max-height: 45vh; /* Ekranýn %90’ýný geçmesin */
 }
 
     .modal-content img {
