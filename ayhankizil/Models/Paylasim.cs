@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ayhankizil.Models
 {
-    [Table("Paylasimlar")] // Veritabanındaki tablo adı
+    [Table("Paylasimlar")]
     public class Paylasim
     {
         [Key]
@@ -15,13 +15,11 @@ namespace ayhankizil.Models
         [Column("AdSoyad")]
         public string AdSoyad { get; set; }
 
-        [StringLength(150)]
+        [StringLength(100)]
         [Column("Email")]
         public string? Email { get; set; }
 
-        [Required]
-        [StringLength(1000)]
-        [Column("Icerik")]
+        [Column("Icerik", TypeName = "NVARCHAR(MAX)")]
         public string Icerik { get; set; }
 
         [Column("Foto1")]
@@ -42,8 +40,7 @@ namespace ayhankizil.Models
         [Column("Onayli")]
         public bool Onayli { get; set; } = false;
 
-        // TARİH ALANI EKLENDİ
-        [Column("EklenmeTarihi")]
+        [Column("EklemeTarihi")]
         public DateTime EklenmeTarihi { get; set; } = DateTime.Now;
     }
 }
