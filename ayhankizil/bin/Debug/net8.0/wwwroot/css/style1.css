@@ -125,13 +125,24 @@ h1 {
         max-width: 400px !important;
     }
     body, .text, .paylasilan-metin, .paylasilan-numara, .sol-kutu-yazi {
-        font-size: 25px !important;
+        font-size: 24px !important;
     }
     h1 {
         font-size: 38px !important;
     }
-    .inner-box .content {
-        justify-content: flex-start;
+    .inner-box {
+        padding-left: 15px; /* soldan büyük padding kaldýrýldý */
+        padding-right: 100px; /* saðdan boþluðu koruyabilirsin */
+    }
+
+        .inner-box .content {
+            justify-content: flex-start;
+            gap: 20px; /* içerikler arasý boþluðu küçülttüm, isteðe göre artýrabilirsin */
+        }
+
+    .photo {
+        width: 180px !important;
+        margin-left: 0; /* ekstra boþluk varsa kaldýr */
     }
 
 }
