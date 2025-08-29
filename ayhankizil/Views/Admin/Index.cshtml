@@ -195,6 +195,17 @@
 
 <script>
     // handleButtonClick ve modal scriptleri aynen korunuyor
+
+    // Resim tıklanınca modalda açılması için
+    document.addEventListener("DOMContentLoaded", function () {
+        const modalImage = document.getElementById("modalImage");
+        document.querySelectorAll(".clickable-img").forEach(img => {
+            img.addEventListener("click", function () {
+                const src = this.getAttribute("data-bs-src");
+                modalImage.setAttribute("src", src);
+            });
+        });
+    });
 </script>
 
 <style>
